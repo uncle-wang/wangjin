@@ -1,26 +1,32 @@
-// 引入依赖
 var express = require('express');
+var superagent = require('superagent');
+var cheerio = require('cheerio');
+var jade = require('jade');
 
-// 建立 express 实例
 var app = express();
-
 app.use('/resources', express.static('public'));
-
+app.set('views', './views');
+app.set('view engine', 'jade');
+app.engine('jade', jade.__express);
 app.get('/', function (req, res) {
-  // 从 req.query 中取出我们的 q 参数。
-  // 如果是 post 传来的 body 数据，则是在 req.body 里面，不过 express 默认不处理 body 中的信息，需要引入 https://github.com/expressjs/body-parser 这个中间件才会处理，这个后面会讲到。
-  // 如果分不清什么是 query，什么是 body 的话，那就需要补一下 http 的知识了
-  var q = req.query.q || 'default';
 
-  // 调用 utility.md5 方法，得到 md5 之后的值
-  // 之所以使用 utility 这个库来生成 md5 值，其实只是习惯问题。每个人都有自己习惯的技术堆栈，
-  // 我刚入职阿里的时候跟着苏千和朴灵混，所以也混到了不少他们的技术堆栈，仅此而已。
-  // utility 的 github 地址：https://github.com/node-modules/utility
-  // 里面定义了很多常用且比较杂的辅助方法，可以去看看
+	superagent.get('http://news.qq.com/zt2015/wxghz/index.htm').end(function(err, content) {
 
-  res.sendFile(__dirname + '/views/home.html');
+		var $ = cheerio.load(content.text);
+		var rows = $('.nrC a .title');
+		var news = [];
+		rows.each(function(index, ele) {
+
+			var $ele = $(ele);
+			news.push($ele.text());
+			app.locals.news = news;
+//			news.push({title: $ele.find('.title').html(), des: $ele.find('p').html()});
+		});
+		res.render('test');
+	});
 });
 
 app.listen(process.env.PORT || 3000, function (req, res) {
-  console.log('app is running at port 3000');
+
+	console.log('app is running at port 3000');
 });
