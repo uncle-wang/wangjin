@@ -10,7 +10,14 @@ app.set('view engine', 'jade');
 app.engine('jade', jade.__express);
 app.get('/', function (req, res) {
 
-	superagent.get('http://news.qq.com/zt2015/wxghz/index.htm').end(function(err, content) {
+	var param = req.query.param;
+	if (param !== '' && param !== undefined) {
+		
+		app.locals.title = param;
+	}
+	res.render('test');
+
+/*	superagent.get('http://news.qq.com/zt2015/wxghz/index.htm').end(function(err, content) {
 
 		var $ = cheerio.load(content.text);
 		var rows = $('.nrC a .title');
@@ -20,11 +27,10 @@ app.get('/', function (req, res) {
 			var $ele = $(ele);
 			news.push($ele.text());
 			app.locals.news = news;
-//			news.push({title: $ele.find('.title').html(), des: $ele.find('p').html()});
 		});
 		res.render('test');
 	});
-});
+*/});
 
 app.listen(process.env.PORT || 3000, function (req, res) {
 

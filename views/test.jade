@@ -1,11 +1,12 @@
 doctype html
 html
 	head
-		title kim page
+		title kim #{title}
+		meta(charset="utf-8")
 		meta(name="viewport", content="width=device-width")
-		link(rel="stylesheet", type="text/css", href="resources/css/style.css")
+		link(rel="stylesheet", type="text/css", href="resources/css/main.css")
 		script(type="text/javascript", src="resources/js/jquery-2.1.4.min.js")
 	body
-		form
-			input(type="text")
+		form 请输入参数
+			input(name="param", type="text")
 			input(type="submit")
