@@ -10,19 +10,21 @@ app.set('views', './views');
 app.set('view engine', 'jade');
 app.engine('jade', jade.__express);
 app.get('/', function (req, res) {
-	var str = '';
+	var arr = [];
 	pg.defaults.ssl = true;
-	pg.connect(process.env.DATABASE_URL, function(err, client) {
+	pg.connect('postgres://encabebhciufqx:og02_xQtWI9cy9Ky9W05wNTV5i@ec2-54-235-125-135.compute-1.amazonaws.com:5432/d9tjjqnpjg5dc7', function(err, client) {
 		if (err) throw err;
 		console.log('Connected to postgres! Getting schemas...');
 
 		client
 		.query('SELECT * FROM n_user;')
 		.on('row', function(row) {
-			str += JSON.stringify(row);
-		});
-		res.send(str);
+			arr.push(JSON.stringify(row));
+		}).on('end', function() {
+			res.send(arr);
+		})
 	});
+	console.log('end');
 
 /*	var param = req.query.param;
 	if (param !== '' && param !== undefined) {
