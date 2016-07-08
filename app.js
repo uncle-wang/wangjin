@@ -19,9 +19,10 @@ app.get('/', function (req, res) {
 		client
 		.query('SELECT * FROM n_user;')
 		.on('row', function(row) {
-			arr.push(JSON.stringify(row));
+			arr.push(row);
 		}).on('end', function() {
-			res.send(arr);
+			app.locals.users = arr;
+			res.render('test');
 		})
 	});
 	console.log('end');
