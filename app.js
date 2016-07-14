@@ -56,6 +56,11 @@ app.get('/3d', function(req, res) {
 	res.sendFile(__dirname + '/views/3d.html');
 });
 
+app.get('/compass', function(req, res) {
+
+	res.sendFile(__dirname + '/views/compass.html');
+});
+
 app.listen(process.env.PORT || 3000, function (req, res) {
 
 	console.log('app is running at port 3000');

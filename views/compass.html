@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width">
+		<title>罗盘</title>
+		<style type="text/css">
+			* {margin: 0; padding: 0;}
+			body {font-size: 16px;}
+			body * {position: relative;}
+			body > div {position: fixed;}
+			.compass {top: 50%; left: 50%; width: 200px; height: 200px; margin: -100px; border: 1px solid red; border-radius: 100px;}
+				.compass .dial {width: 100%; height: 100%;}
+					.compass .dial span {width: 20px; height: 20px; text-align: center; line-height: 20px; position: absolute;}
+					.compass .dial span:nth-child(1) {top: 0; left: 50%; margin-left: -10px; color: red; font-weight: bold;}
+					.compass .dial span:nth-child(2) {top: 50%; right: 0; margin-top: -10px;}
+					.compass .dial span:nth-child(3) {left: 50%; bottom: 0; margin-left: -10px;}
+					.compass .dial span:nth-child(4) {top: 50%; left: 0; margin-top: -10px;}
+				.compass .needle {left: 50%; bottom: 50%; width: 2px; height: 80px; background: #000; margin-left: -1px; position: absolute;}
+					.compass .needle .point {width: 8px; height: 8px; bottom: -3px; left: -3px; background: #000; position: absolute; border-radius: 4px;}
+			.horizontal {left: 50%; bottom: 20px; width: 254px; height: 14px; position: fixed; margin-left: -127px; border: 1px solid red; border-radius: 7px;}
+				.horizontal div {width: 14px; height: 14px; background: #000; position: absolute; border-radius: 7px;}
+		</style>
+	</head>
+	<body>
+		<div class="compass">
+			<div class="dial">
+				<span>N</span>
+				<span>E</span>
+				<span>S</span>
+				<span>W</span>
+			</div>
+			<div class="needle"><div class="point"></div></div>
+		</div>
+		<div class="hor-text"></div>
+		<div class="horizontal"><div></div></div>
+		<div class="vertical"></div>
+	</body>
+	<script type="text/javascript">
+		var needle = document.querySelector('.compass .needle');
+		var dial = document.querySelector('.compass .dial');
+		var horizontal = document.querySelector('.horizontal div');
+		var lastAlpha = 0;
+		var lastGamma = 0;
+		var test = function(eventData) {
+			var alpha = eventData.alpha;
+			var gamma = eventData.gamma;
+			if (Math.abs(Math.floor(alpha) - Math.floor(lastAlpha)) >= 1) {
+				dial.style.transform = 'rotateZ(' + eventData.alpha + 'deg)';
+				lastAlpha = alpha;
+			}
+			if (Math.abs(Math.floor(gamma) - Math.floor(lastGamma)) >= 1) {
+				var left = (gamma + 90) * 240 / 180;
+				horizontal.style.left = left + 'px';
+				document.querySelector('.hor-text').innerHTML = Math.floor(gamma);
+				lastGamma = gamma;
+			}
+		};
+		if (window.DeviceOrientationEvent) {
+			window.addEventListener('deviceorientation', function(eventData) {
+				test(eventData);
+			});
+		}
+	</script>
+</html>
