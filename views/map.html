@@ -42,7 +42,7 @@
 	</body>
 	<script type="text/javascript">
 
-		var ALL = {title: '全部品牌', data: [
+		var ALL = {title: '全部品牌', max: 420, data: [
 			{name: 'Nigeria', value: 4147271},
 			{name: 'u-unknown', value: 2150204},
 			{name: 'Kenya', value: 1847498},
@@ -131,7 +131,7 @@
 			{name: 'Nicaragua', value: 951}
 		]};
 
-		var INFINIX = {title: 'infinix', data: [
+		var INFINIX = {title: 'infinix', max: 91, data: [
 			{name: 'Nigeria', value: 908001},
 			{name: 'u-unknown', value: 808158},
 			{name: 'Egypt', value: 641825},
@@ -180,7 +180,7 @@
 			{name: 'Mexico', value: 943}
 		]};
 
-		var ITEL = {title: 'itel', data: [
+		var ITEL = {title: 'itel', max: 26, data: [
 			{name: 'India', value: 251253},
 			{name: 'Nigeria', value: 135174},
 			{name: 'Ivory Coast', value: 117903},
@@ -219,7 +219,7 @@
 			{name: 'Angola', value: 962}
 		]};
 
-		var TECNO = {title: 'tecno', data: [
+		var TECNO = {title: 'tecno', max: 310, data: [
 			{name: 'Nigeria', value: 3099275},
 			{name: 'United Republic of Tanzania', value: 1443485},
 			{name: 'Kenya', value: 1323252},
@@ -312,13 +312,10 @@
 			},
 			visualMap: {
 				min: 0,
-				max: 130000,
+				max: 100000,
 				text:['High','Low'],
 				realtime: false,
-				calculable: true,
-				// inRange: {
-				// 	color: ['white','orangered', 'red']
-				// }
+				calculable: true
 			},
 			series: [
 				{
@@ -338,6 +335,7 @@
 		var showChart = function(data) {
 
 			option.title.text = data.title;
+			option.visualMap.max = data.max * 10000;
 			option.series[0].name = data.title;
 			option.series[0].data = data.data;
 			chart.clear();
