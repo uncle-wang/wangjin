@@ -127,6 +127,11 @@ app.get('/block', function(req, res) {
 	res.sendFile(__dirname + '/views/block.html');
 });
 
+app.get('/map', function(req, res) {
+
+	res.sendFile(__dirname + '/views/map.html');
+});
+
 app.listen(process.env.PORT || 3000, function (req, res) {
 
 	console.log('app is running at port 3000');

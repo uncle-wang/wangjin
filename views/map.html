@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script type="text/javascript" src="resources/js/echarts.min.js"></script>
+		<script type="text/javascript" src="resources/js/world.js"></script>
+		<style type="text/css">
+			#map {
+				width: 1000px;
+				height: 600px;
+				margin: 40px auto;
+			}
+			.buttons {
+				text-align: center;
+			}
+			.buttons input {
+				width: 180px;
+				height: 38px;
+				outline: none;
+				margin: 0 5px;
+				color: #19b5f9;
+				cursor: pointer;
+				background: none;
+				border-radius: 3px;
+				border: 1px solid #4eb0db;
+			}
+			.buttons input:hover {
+				color: #fff;
+				border: none;
+				background: #a5a5a5;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="map"></div>
+		<div class="buttons">
+			<input type="button" value="INFINIX" onclick="showChart(INFINIX)">
+			<input type="button" value="TECNO" onclick="showChart(TECNO)">
+			<input type="button" value="ITEL" onclick="showChart(ITEL)">
+		</div>
+	</body>
+	<script type="text/javascript">
+
+		var INFINIX = {title: 'infinix', data: [
+			{name: 'Nigeria', value: 908001},
+			{name: 'u-unknown', value: 808158},
+			{name: 'Egypt', value: 641825},
+			{name: 'Ivory Coast', value: 486773},
+			{name: 'Kenya', value: 468244},
+			{name: 'Ghana', value: 428538},
+			{name: 'Indonesia', value: 122138},
+			{name: 'Pakistan', value: 75714},
+			{name: 'Benin', value: 71414},
+			{name: 'Morocco', value: 40606},
+			{name: 'United Republic of Tanzania', value: 17499},
+			{name: 'Saudi Arabia', value: 11798},
+			{name: 'Ethiopia', value: 11320},
+			{name: 'Togo', value: 11260},
+			{name: 'Burkina Faso', value: 10889},
+			{name: 'Niger', value: 10684},
+			{name: 'Uganda', value: 9705},
+			{name: 'United Arab Emirates', value: 9169},
+			{name: 'India', value: 8153},
+			{name: 'Cameroon', value: 6966},
+			{name: 'Philippines', value: 6893},
+			{name: 'Mali', value: 6506},
+			{name: 'Vietnam', value: 5269},
+			{name: 'Somali', value: 5239},
+			{name: 'Senegal', value: 4837},
+			{name: 'Guinea', value: 4607},
+			{name: 'Liberia', value: 4131},
+			{name: 'China', value: 4099},
+			{name: 'France', value: 3780},
+			{name: 'Zambia', value: 3197},
+			{name: 'United Kingdom', value: 3081},
+			{name: 'South Sudan', value: 2648},
+			{name: 'United States of America', value: 2520},
+			{name: 'Sudan', value: 1966},
+			{name: 'South Africa', value: 1818},
+			{name: 'Thailand', value: 1542},
+			{name: 'Bangladesh', value: 1379},
+			{name: 'Gabon', value: 1365},
+			{name: 'Democratic Republic of the Congo', value: 1359},
+			{name: 'Mauritania', value: 1178},
+			{name: 'Guadeloupe and Martinique', value: 1095},
+			{name: 'Italy', value: 1092},
+			{name: 'Turkey', value: 1048},
+			{name: 'Lebanon', value: 979},
+			{name: 'Colombia', value: 951},
+			{name: 'Mexico', value: 943}
+		]};
+
+		var ITEL = {title: 'itel', data: [
+			{name: 'India', value: 251253},
+			{name: 'Nigeria', value: 135174},
+			{name: 'Ivory Coast', value: 117903},
+			{name: 'u-unknown', value: 88042},
+			{name: 'Ghana', value: 79799},
+			{name: 'Kenya', value: 56002},
+			{name: 'Mali', value: 37815},
+			{name: 'Cameroon', value: 35309},
+			{name: 'Senegal', value: 33227},
+			{name: 'United Republic of Tanzania', value: 29959},
+			{name: 'Uganda', value: 23433},
+			{name: 'Togo', value: 21709},
+			{name: 'Democratic Republic of the Congo', value: 21525},
+			{name: 'Zambia', value: 18656},
+			{name: 'Guinea', value: 16925},
+			{name: 'Benin', value: 16860},
+			{name: 'Ethiopia', value: 10489},
+			{name: 'Niger', value: 9898},
+			{name: 'Montserrat', value: 9867},
+			{name: 'Malawi', value: 8256},
+			{name: 'Somali', value: 7563},
+			{name: 'Burkina Faso', value: 7433},
+			{name: 'Egypt', value: 5901},
+			{name: 'Republic of the Congo', value: 5848},
+			{name: 'Liberia', value: 4219},
+			{name: 'Gabon', value: 3897},
+			{name: 'Burundi', value: 3498},
+			{name: 'Rwanda', value: 3485},
+			{name: 'Guinea Bissau', value: 3290},
+			{name: 'Mauritania', value: 3274},
+			{name: 'Mozambique', value: 2747},
+			{name: 'Gambia', value: 2717},
+			{name: 'Nepal', value: 2132},
+			{name: 'Sierra Leone', value: 1811},
+			{name: 'Chad', value: 1201},
+			{name: 'Angola', value: 962}
+		]};
+
+		var TECNO = {title: 'tecno', data: [
+			{name: 'Nigeria', value: 3099275},
+			{name: 'United Republic of Tanzania', value: 1443485},
+			{name: 'Kenya', value: 1323252},
+			{name: 'u-unknown', value: 1133773},
+			{name: 'Ghana', value: 653773},
+			{name: 'Guinea', value: 480957},
+			{name: 'Egypt', value: 458969},
+			{name: 'Mali', value: 417027},
+			{name: 'Uganda', value: 325663},
+			{name: 'Cameroon', value: 275848},
+			{name: 'Rwanda', value: 208651},
+			{name: 'Sudan', value: 167741},
+			{name: 'Ethiopia', value: 135307},
+			{name: 'Senegal', value: 113043},
+			{name: 'Benin', value: 112326},
+			{name: 'Ivory Coast', value: 109626},
+			{name: 'Liberia', value: 99172},
+			{name: 'Sierra Leone', value: 92998},
+			{name: 'Democratic Republic of the Congo', value: 91294},
+			{name: 'Somali', value: 78180},
+			{name: 'Niger', value: 69111},
+			{name: 'Zambia', value: 61981},
+			{name: 'Burundi', value: 48401},
+			{name: 'Burkina Faso', value: 40943},
+			{name: 'Togo', value: 33360},
+			{name: 'Chad', value: 30891},
+			{name: 'Gabon', value: 28156},
+			{name: 'South Sudan', value: 20679},
+			{name: 'Malawi', value: 15826},
+			{name: 'Mozambique', value: 12416},
+			{name: 'Angola', value: 11762},
+			{name: 'India', value: 9893},
+			{name: 'Guinea Bissau', value: 9015},
+			{name: 'Gambia', value: 8346},
+			{name: 'China', value: 7943},
+			{name: 'Vietnam', value: 6820},
+			{name: 'Republic of the Congo', value: 6640},
+			{name: 'Zimbabwe', value: 6245},
+			{name: 'Saudi Arabia', value: 5868},
+			{name: 'Madagascar', value: 5255},
+			{name: 'United Arab Emirates', value: 4904},
+			{name: 'South Africa', value: 4789},
+			{name: 'Equatorial Guinea', value: 4698},
+			{name: 'Central African Republic', value: 4534},
+			{name: 'France', value: 4236},
+			{name: 'United Kingdom', value: 3700},
+			{name: 'Morocco', value: 3569},
+			{name: 'Mauritania', value: 3340},
+			{name: 'United States of America', value: 2675},
+			{name: 'Pakistan', value: 2494},
+			{name: 'Algeria', value: 2291},
+			{name: 'Indonesia', value: 2113},
+			{name: 'Libya', value: 1876},
+			{name: 'Tunisia', value: 1669},
+			{name: 'Turkey', value: 1467},
+			{name: 'Germany', value: 1376},
+			{name: 'Italy', value: 1281},
+			{name: 'Netherlands', value: 1262},
+			{name: 'Bangladesh', value: 1239},
+			{name: 'Qatar', value: 1216},
+			{name: 'Uruguay', value: 1150},
+			{name: 'Belgium', value: 1069},
+			{name: 'Philippines', value: 1032},
+			{name: 'Comoros', value: 976}
+		]};
+
+		var chart = echarts.init(document.getElementById('map'));
+
+		var option = {
+
+			title: {
+				text: '',
+				subtext: '',
+				left: 'center',
+				top: 'top'
+			},
+			tooltip: {
+				trigger: 'item'
+			},
+			toolbox: {
+				show: true,
+				orient: 'vertical',
+				left: 'right',
+				top: 'center',
+				feature: {
+					dataView: {readOnly: false},
+					restore: {},
+					saveAsImage: {}
+				}
+			},
+			visualMap: {
+				min: 0,
+				max: 130000,
+				text:['High','Low'],
+				realtime: false,
+				calculable: true,
+				// inRange: {
+				// 	color: ['white','orangered', 'red']
+				// }
+			},
+			series: [
+				{
+					name: '',
+					type: 'map',
+					mapType: 'world',
+					roam: true,
+					label: {normal: {show: false}},
+					itemStyle:{
+						emphasis: {label: {show: true}}
+					},
+					data: []
+				}
+			]
+		};
+
+		var showChart = function(data) {
+
+			option.title.text = data.title;
+			option.series[0].name = data.title;
+			option.series[0].data = data.data;
+			chart.clear();
+			chart.setOption(option);
+		};
+
+		showChart(INFINIX);
+
+	</script>
+</html>
