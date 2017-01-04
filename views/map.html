@@ -2,8 +2,8 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<script type="text/javascript" src="resources/js/echarts.min.js"></script>
-		<script type="text/javascript" src="resources/js/world.js"></script>
+		<script type="text/javascript" src="/resources/js/echarts.min.js"></script>
+		<script type="text/javascript" src="/resources/js/world.js"></script>
 		<style type="text/css">
 			#map {
 				width: 1000px;
@@ -34,12 +34,102 @@
 	<body>
 		<div id="map"></div>
 		<div class="buttons">
+			<input type="button" value="全部品牌" onclick="showChart(ALL)">
 			<input type="button" value="INFINIX" onclick="showChart(INFINIX)">
 			<input type="button" value="TECNO" onclick="showChart(TECNO)">
 			<input type="button" value="ITEL" onclick="showChart(ITEL)">
 		</div>
 	</body>
 	<script type="text/javascript">
+
+		var ALL = {title: '全部品牌', data: [
+			{name: 'Nigeria', value: 4147271},
+			{name: 'u-unknown', value: 2150204},
+			{name: 'Kenya', value: 1847498},
+			{name: 'United Republic of Tanzania', value: 1490943},
+			{name: 'Ghana', value: 1162110},
+			{name: 'Egypt', value: 1110870},
+			{name: 'Ivory Coast', value: 714302},
+			{name: 'Guinea', value: 502489},
+			{name: 'Mali', value: 461348},
+			{name: 'India', value: 367557},
+			{name: 'Uganda', value: 358801},
+			{name: 'Indonesia', value: 328822},
+			{name: 'Cameroon', value: 318123},
+			{name: 'Rwanda', value: 212136},
+			{name: 'Benin', value: 200600},
+			{name: 'Sudan', value: 169707},
+			{name: 'Ethiopia', value: 157116},
+			{name: 'Senegal', value: 151107},
+			{name: 'Liberia', value: 115710},
+			{name: 'Democratic Republic of the Congo', value: 114178},
+			{name: 'Pakistan', value: 103115},
+			{name: 'Sierra Leone', value: 94809},
+			{name: 'Somali', value: 90982},
+			{name: 'Niger', value: 89693},
+			{name: 'Zambia', value: 83834},
+			{name: 'Togo', value: 66329},
+			{name: 'Burkina Faso', value: 59265},
+			{name: 'Burundi', value: 51899},
+			{name: 'Morocco', value: 45786},
+			{name: 'Gabon', value: 33418},
+			{name: 'Chad', value: 32092},
+			{name: 'Malawi', value: 24082},
+			{name: 'South Sudan', value: 23327},
+			{name: 'Bangladesh', value: 19157},
+			{name: 'Philippines', value: 18852},
+			{name: 'China', value: 18576},
+			{name: 'Saudi Arabia', value: 17666},
+			{name: 'Vietnam', value: 16602},
+			{name: 'Mozambique', value: 15163},
+			{name: 'United Arab Emirates', value: 14073},
+			{name: 'France', value: 12758},
+			{name: 'Angola', value: 12724},
+			{name: 'Republic of the Congo', value: 12488},
+			{name: 'Guinea Bissau', value: 12305},
+			{name: 'Mexico', value: 11851},
+			{name: 'Gambia', value: 11063},
+			{name: 'Colombia', value: 10196},
+			{name: 'Montserrat', value: 9867},
+			{name: 'South Africa', value: 9731},
+			{name: 'Ukraine', value: 8162},
+			{name: 'United Kingdom', value: 7916},
+			{name: 'Mauritania', value: 7792},
+			{name: 'United States of America', value: 7459},
+			{name: 'Zimbabwe', value: 6245},
+			{name: 'Italy', value: 5475},
+			{name: 'Madagascar', value: 5255},
+			{name: 'Russia', value: 5001},
+			{name: 'Malaysia', value: 4732},
+			{name: 'Equatorial Guinea', value: 4698},
+			{name: 'Central African Republic', value: 4534},
+			{name: 'Spain', value: 4464},
+			{name: 'Nepal', value: 4064},
+			{name: 'Algeria', value: 3738},
+			{name: 'Germany', value: 3558},
+			{name: 'Tunisia', value: 2998},
+			{name: 'Iran', value: 2904},
+			{name: 'Brazil', value: 2761},
+			{name: 'Venezuela', value: 2645},
+			{name: 'Thailand', value: 2557},
+			{name: 'Turkey', value: 2515},
+			{name: 'Honduras', value: 2426},
+			{name: 'Czech Republic', value: 2238},
+			{name: 'Ecuador', value: 2114},
+			{name: 'Libya', value: 1876},
+			{name: 'Costa Rica', value: 1575},
+			{name: 'Portugal', value: 1470},
+			{name: 'Netherlands', value: 1262},
+			{name: 'Qatar', value: 1216},
+			{name: 'Uruguay', value: 1150},
+			{name: 'Guadeloupe and Martinique', value: 1095},
+			{name: 'Belgium', value: 1069},
+			{name: 'Romania', value: 1063},
+			{name: 'Afghanistan', value: 1023},
+			{name: 'Lebanon', value: 979},
+			{name: 'Comoros', value: 976},
+			{name: 'Nicaragua', value: 951}
+		]};
 
 		var INFINIX = {title: 'infinix', data: [
 			{name: 'Nigeria', value: 908001},
@@ -254,7 +344,7 @@
 			chart.setOption(option);
 		};
 
-		showChart(INFINIX);
+		showChart(ALL);
 
 	</script>
 </html>
