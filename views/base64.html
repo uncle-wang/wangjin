@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>文件转base64</title>
+	<style type="text/css">
+		* {
+			font-family: Arial;
+			padding: 0;
+			margin: 0;
+		}
+		.item {
+			border: 1px solid #a2a2a2;
+			border-top: none;
+			color: #505050;
+			display: flex;
+		}
+		.item:first-child {
+			border-top: 1px solid #a2a2a2;
+		}
+		.file-name {
+			border-right: 1px solid #a2a2a2;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			text-align: center;
+			overflow: hidden;
+			flex: 0 0 200px;
+		}
+		.file-base64 {
+			overflow: hidden;
+			-webkit-flex: 1;
+			padding: 0 10px;
+		}
+		.file-base64 textarea {
+			overflow: hidden;
+			display: block;
+			outline: none;
+			border: none;
+			resize: none;
+			width: 100%;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<input type="file" multiple="multiple" onchange="getFiles(this)">
+		<p>请选择文件(支持多选)</p>
+	</div>
+	<div id="baseArea"></div>
+	<script type="text/javascript">
+		var fileInputs;
+
+		var list = document.getElementById('baseArea');
+
+		var appendFile = function(file) {
+
+			var fileItem = document.createElement('div');
+			var fileName = document.createElement('div');
+			var fileBase = document.createElement('div');
+			var textArea = document.createElement('textarea');
+
+			fileItem.setAttribute('class', 'item');
+			fileName.setAttribute('class', 'file-name');
+			fileBase.setAttribute('class', 'file-base64');
+			fileName.innerText = file.name;
+
+			var reader = new FileReader();
+			reader.readAsDataURL(file);
+			reader.onload = function() {
+				textArea.innerText = reader.result;
+			}
+
+			list.appendChild(fileItem);
+			fileItem.appendChild(fileName);
+			fileItem.appendChild(fileBase);
+			fileBase.appendChild(textArea);
+		};
+
+		var getFiles = function(fileInput) {
+
+			var files = fileInput.files;
+			list.innerHTML = '';
+			for (var i = 0; i < files.length; i ++) {
+				appendFile(files[i]);
+			}
+		};
+	</script>
+</body>
+</html>

@@ -19,6 +19,9 @@ app
 	.get('/map', function(req, res) {
 		res.sendFile(__dirname + '/views/map.html');
 	})
+	.get('/base64', function(req, res) {
+		res.sendFile(__dirname + '/views/base64.html');
+	})
 	.listen(process.env.PORT || 3000, function (req, res) {
 		console.log('app is running at port 3000');
 	});
