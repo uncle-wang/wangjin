@@ -13,7 +13,7 @@ app
 	// 路由配置
 	.get('/', function (req, res) {
 
-		res.send('go die');
+		res.sendFile(__dirname + '/views/home.html');
 	})
 
 	.get('/3d', function(req, res) {

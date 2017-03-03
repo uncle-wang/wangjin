@@ -1,0 +1,32 @@
+* {
+	margin: 0;
+	padding: 0;
+	font-family: Arial;
+}
+ul, li {
+	list-style-type: none;
+}
+.wrap {
+	padding: 20px 20px;
+}
+.part {
+	margin-top: 20px;
+}
+.part:first-child {
+	margin-top: 0;
+}
+.part-title {
+	font-size: 16px;
+	color: #5c5c5c;
+}
+.part-body {
+	margin-top: 8px;
+}
+.part-link {
+	margin-top: 5px;
+}
+.part-link a {
+	display: block;
+	color: #356f89;
+	font-size: 14px;
+}
