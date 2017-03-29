@@ -27,6 +27,7 @@ app
 	})
 
 	.get('/map', function(req, res) {
+
 		res.sendFile(__dirname + '/views/map.html');
 	})
 
@@ -36,7 +37,13 @@ app
 	})
 
 	.get('/base64', function(req, res) {
+
 		res.sendFile(__dirname + '/views/base64.html');
+	})
+
+	.use(function(req, res) {
+
+		res.sendFile(__dirname + '/views/404.html');
 	})
 
 	.listen(process.env.PORT || 3000, function (req, res) {
