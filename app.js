@@ -1,7 +1,10 @@
 // 加载express框架
 var 
+	fx = require('./controllers/fx'),
 	express = require('express'),
 	app = express();
+
+fx.route(app);
 
 app
 
