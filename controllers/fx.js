@@ -1,12 +1,12 @@
-var path = require('path');
+var fp = require('./../filepath');
 
 var route = function(app) {
 
 	app
 
-	.get('/fx', function(req, res, next) {
+	.get('/fx', function(req, res) {
 
-		res.send(path.join(__dirname + 'views/fx.html'));
+		res.sendFile(fp.view('fx'));
 	});
 
 	return this;
