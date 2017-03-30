@@ -41,6 +41,11 @@ app
 		res.sendFile(__dirname + '/views/base64.html');
 	})
 
+	.use('/api', function(req, res) {
+
+		res.send({status: 2});
+	})
+
 	.use(function(req, res) {
 
 		res.sendFile(__dirname + '/views/404.html');
