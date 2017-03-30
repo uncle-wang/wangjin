@@ -1,5 +1,6 @@
 // 加载express框架
 var 
+	dw = require('./datawrap'),
 	fx = require('./controllers/fx'),
 	express = require('express'),
 	app = express();
@@ -46,7 +47,7 @@ app
 
 	.use('/api', function(req, res) {
 
-		res.send({status: 2});
+		dw.sendError(res, 'APINOTFOUND');
 	})
 
 	.use('/view', function(req, res) {

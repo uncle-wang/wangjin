@@ -1,4 +1,6 @@
 var fp = require('./../filepath');
+var fx = require(fp.module('fx'));
+var dw = require('./../datawrap');
 
 var route = function(app) {
 
@@ -9,14 +11,20 @@ var route = function(app) {
 		res.sendFile(fp.view('fx'));
 	})
 
-	.get('/api/fx', function(req, res) {
+	.get('/api/fx/getCategoryList', function(req, res) {
 
-		res.send('fx api')
+		dw.sendData(res, fx.getCategoryList());
 	})
 
-	.get('/fx/getTest', function(req, res) {
+	.get('/api/fx/getItemListByCategoryId', function(req, res) {
 
-		console.log('test');
+		var categoryId = req.query.categoryId;
+		if (categoryId) {
+			dw.sendData(res, fx.getItemListByCategoryId(categoryId));
+		}
+		else {
+			dw.sendError(res, 'PARAMERROR');
+		}
 	});
 
 	return this;
