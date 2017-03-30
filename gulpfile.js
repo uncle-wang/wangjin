@@ -2,16 +2,14 @@ var gulp = require('gulp');
 var less = require('gulp-less');
 var cleancss = require('gulp-clean-css');
 var uglify = require('gulp-uglify');
-var concat = require('gulp-concat');
 var watch = require('gulp-watch');
 var fs = require('fs');
 
-var lessFiles = './resources/public/less/**/*.less';
-var cssDirectory  = './resources/public/css/';
-var jspDirectory = './WEB-INF/views/webstore/';
-var jsFiles = ['./resources/webstore/js_dev/**/*.js', '!./resources/webstore/js_dev/home/*.js'];
-var jsHome = './resources/webstore/js_dev/home/*.js';
-var jsDirectory = './resources/webstore/js';
+var lessFiles = './dev/less/**/**/*.less';
+var cssDirectory  = './public/css/';
+var viewDirectory = './views/';
+var jsDevFiles = './dev/js/**/**/*.js';
+var jsDirectory = './public/js';
 
 // 编译less文件
 gulp.task('compileLess', function() {
@@ -36,41 +34,31 @@ gulp.task('uglifyjs', function() {
 		.pipe(uglify())
 		.pipe(gulp.dest(jsDirectory));
 });
-// 压缩、合并home文件夹下的js文件
-gulp.task('concathome', function() {
-
-	gulp
-		.src(jsHome)
-		.pipe(uglify())
-		.pipe(concat('home.js'))
-		.pipe(gulp.dest(jsDirectory + '/home/'));
-});
 // 监测js文件变化
 gulp.task('watchjs', function() {
 
-	gulp.watch(jsFiles, ['uglifyjs']);
-	gulp.watch(jsHome, ['concathome']);
+	gulp.watch(jsDevFiles, ['uglifyjs']);
 });
 
-// 生成新的静态资源版本号
-gulp.task('rev', function() {
+// // 生成新的静态资源版本号
+// gulp.task('rev', function() {
 
-	fs.readdir(jspDirectory, function(err, files) {
+// 	fs.readdir(viewDirectory, function(err, files) {
 
-		if (err) throw err;
-		var reg = new RegExp('\\?v=[0-9]+', 'g');
-		var newVersion = '?v=' + Date.now().toString();
-		files.forEach(function(fileName) {
-			fs.readFile(jspDirectory + fileName, 'utf8', function(err, fileContent) {
-				if (err) throw err;
-				var newContent = fileContent.replace(reg, newVersion);
-				fs.writeFile(jspDirectory + fileName, newContent, 'utf8', function(err) {
-					if (err) throw err;
-					console.log(fileName + ' ok');
-				});
-			});
-		});
-	});
-});
+// 		if (err) throw err;
+// 		var reg = new RegExp('\\?v=[0-9]+', 'g');
+// 		var newVersion = '?v=' + Date.now().toString();
+// 		files.forEach(function(fileName) {
+// 			fs.readFile(viewDirectory + fileName, 'utf8', function(err, fileContent) {
+// 				if (err) throw err;
+// 				var newContent = fileContent.replace(reg, newVersion);
+// 				fs.writeFile(viewDirectory + fileName, newContent, 'utf8', function(err) {
+// 					if (err) throw err;
+// 					console.log(fileName + ' ok');
+// 				});
+// 			});
+// 		});
+// 	});
+// });
 
 gulp.task('default', ['watchless', 'watchjs']);
