@@ -30,7 +30,7 @@ gulp.task('watchless', function() {
 gulp.task('uglifyjs', function() {
 
 	gulp
-		.src(jsFiles)
+		.src(jsDevFiles)
 		.pipe(uglify())
 		.pipe(gulp.dest(jsDirectory));
 });
