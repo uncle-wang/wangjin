@@ -4,7 +4,7 @@ var route = function(app) {
 
 	app
 
-	.get('/fx', function(req, res) {
+	.get('/view/fx', function(req, res) {
 
 		res.sendFile(fp.view('fx'));
 	})

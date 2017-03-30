@@ -19,27 +19,27 @@ app
 		res.sendFile(__dirname + '/views/home.html');
 	})
 
-	.get('/3d', function(req, res) {
+	.get('/view/3d', function(req, res) {
 
 		res.sendFile(__dirname + '/views/3d.html');
 	})
 
-	.get('/compass', function(req, res) {
+	.get('/view/compass', function(req, res) {
 
 		res.sendFile(__dirname + '/views/compass.html');
 	})
 
-	.get('/map', function(req, res) {
+	.get('/view/map', function(req, res) {
 
 		res.sendFile(__dirname + '/views/map.html');
 	})
 
-	.get('/block', function(req, res) {
+	.get('/view/block', function(req, res) {
 
 		res.sendFile(__dirname + '/views/block.html');
 	})
 
-	.get('/base64', function(req, res) {
+	.get('/view/base64', function(req, res) {
 
 		res.sendFile(__dirname + '/views/base64.html');
 	})
@@ -49,7 +49,7 @@ app
 		res.send({status: 2});
 	})
 
-	.use(function(req, res) {
+	.use('/view', function(req, res) {
 
 		res.sendFile(__dirname + '/views/404.html');
 	})
