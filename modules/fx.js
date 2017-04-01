@@ -1,5 +1,6 @@
 var fs = require('fs');
 var fp = require('./../filepath');
+var db = require('./../database');
 
 // 数据文件路径
 var configFileName = fp.config('fx_data');
