@@ -1,6 +1,7 @@
 var fs = require('fs');
 var fp = require('./../filepath');
 var db = require('./../database');
+var dw = require('./../datawrap');
 
 // 数据文件路径
 var configFileName = fp.config('fx_data');
@@ -28,9 +29,12 @@ var _save = function() {
 };
 
 // 查询分类列表
-var getCategoryList = function() {
+var getCategoryList = function(req, res) {
 
-	return data.categoryList;
+	db('select * from public.category', function(data) {
+		console.log(data);
+		dw.sendData(res, data);
+	});
 };
 
 // 增加分类

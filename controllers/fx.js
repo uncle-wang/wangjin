@@ -13,7 +13,7 @@ var route = function(app) {
 
 	.get('/api/fx/getCategoryList', function(req, res) {
 
-		dw.sendData(res, fx.getCategoryList());
+		fx.getCategoryList(req, res);
 	})
 
 	.get('/api/fx/addCategory', function(req, res) {
