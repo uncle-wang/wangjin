@@ -18,14 +18,7 @@ var route = function(app) {
 
 	.get('/api/fx/addCategory', function(req, res) {
 
-		var categoryName = req.query.categoryName;
-		if (categoryName) {
-			fx.addCategory(categoryName);
-			dw.sendData(res);
-		}
-		else {
-			dw.sendError(res, 'PARAMERROR');
-		}
+		fx.addCategory(req, res);
 	})
 
 	.get('/api/fx/removeCategory', function(req, res) {

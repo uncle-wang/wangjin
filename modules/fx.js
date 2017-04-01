@@ -32,19 +32,35 @@ var _save = function() {
 var getCategoryList = function(req, res) {
 
 	db('select * from public.category', function(data) {
-		console.log(data);
 		dw.sendData(res, data);
 	});
 };
 
 // 增加分类
-var addCategory = function(categoryName) {
+var addCategory = function(req, res) {
 
 	var categoryIndex = data.index.category;
 	var categoryId = _selfIncrease(categoryIndex);
 	data.categoryList.push({id: categoryId, name: categoryName});
 	data.index.category = categoryId;
 	_save();
+
+	var categoryName = req.query.categoryName;
+	var description = req.query.description;
+	if (categoryName) {
+		var column = 'name';
+		var value = '\'' + categoryName + '\'';
+		if (description) {
+			column += ', description';
+			value += ', \'' + description + '\'';
+		} 
+		db('INSERT INTO public.category(' + column + ') VALUES (' + value + ')', function(data) {
+			dw.sendData(res);
+		});
+	}
+	else {
+		dw.sendError(res, 'PARAMERROR');
+	}
 };
 
 // 删除分类
