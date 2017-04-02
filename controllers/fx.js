@@ -60,13 +60,7 @@ var route = function(app) {
 
 	.get('/api/fx/getItemListByCategoryId', function(req, res) {
 
-		var categoryId = req.query.categoryId;
-		if (categoryId && fx.exsistCategory(categoryId)) {
-			dw.sendData(res, fx.getItemListByCategoryId(categoryId));
-		}
-		else {
-			dw.sendError(res, 'PARAMERROR');
-		}
+		fx.getItemListByCategoryId(req, res);
 	});
 
 	return this;

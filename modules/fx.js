@@ -95,17 +95,17 @@ var exsistCategory = function(categoryId) {
 };
 
 // 查询item列表
-var getItemListByCategoryId = function(categoryId) {
+var getItemListByCategoryId = function(req, res) {
 
-	var itemList = [];
-	var allItems = data.itemList;
-	for (var i = 0; i < allItems.length; i ++) {
-		var item = allItems[i];
-		if (item.categoryId === categoryId) {
-			itemList.push(item);
-		}
+	var categoryId = req.query.categoryId;
+	if (categoryId) {
+		db('SELECT * FROM public.item WHERE category_id=' + categoryId, function(data) {
+			dw.sendData(res, data);
+		});
 	}
-	return itemList;
+	else {
+		dw.sendError(res, 'PARAMERROR');
+	}
 };
 
 // 删除item
