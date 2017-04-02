@@ -35,15 +35,7 @@ var route = function(app) {
 
 	.get('/api/fx/addItem', function(req, res) {
 
-		var categoryId = req.query.categoryId;
-		var itemName = req.query.itemName;
-		if (categoryId && itemName && fx.exsistCategory(categoryId)) {
-			fx.addItem(categoryId, itemName);
-			dw.sendData(res);
-		}
-		else {
-			dw.sendError(res, 'PARAMERROR');
-		}
+		fx.addItem(req, res);
 	})
 
 	.get('/api/fx/removeItem', function(req, res) {

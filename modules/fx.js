@@ -134,13 +134,27 @@ var exsistItem = function(itemId) {
 };
 
 // 增加item
-var addItem = function(categoryId, itemName) {
+var addItem = function(req, res) {
 
-	var itemIndex = data.index.item;
-	var itemId = _selfIncrease(itemIndex);
-	data.itemList.push({id: itemId, categoryId: categoryId, name: itemName});
-	data.index.item = itemId;
-	_save();
+	var categoryId = req.query.categoryId;
+	var itemName = req.query.itemName;
+	var notes = req.query.notes;
+	if (categoryId && itemName) {
+		var column = 'name, category_id';
+		var value = '\'' + itemName + '\'' + ', \'' + categoryId + '\'';
+		if (notes) {
+			notes = notes.replace('[', '{');
+			notes = notes.replace(']', '}');
+			column += ', notes';
+			value += ', \'' + notes + '\'';
+		}
+		db('INSERT INTO public.item(' + column + ') VALUES (' + value + ')', function(data) {
+			dw.sendData(res);
+		});
+	}
+	else {
+		dw.sendError(res, 'PARAMERROR');
+	}
 };
 
 // return
