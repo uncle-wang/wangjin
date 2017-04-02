@@ -40,14 +40,7 @@ var route = function(app) {
 
 	.get('/api/fx/removeItem', function(req, res) {
 
-		var itemId = req.query.itemId;
-		if (itemId && fx.exsistItem(itemId)) {
-			fx.removeItem(itemId);
-			dw.sendData(res);
-		}
-		else {
-			dw.sendError(res, 'PARAMERROR');
-		}
+		fx.removeItem(req, res);
 	})
 
 	.get('/api/fx/getItemListByCategoryId', function(req, res) {

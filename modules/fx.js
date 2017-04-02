@@ -103,16 +103,15 @@ var getItemListByCategoryId = function(req, res) {
 };
 
 // 删除item
-var removeItem = function(itemId) {
+var removeItem = function(req, res) {
 
-	var itemList = data.itemList;
-	for (var i = 0; i < itemList.length; i ++) {
-		if (itemList[i].id === itemId) {
-			itemList.splice(i, 1);
-			break;
-		}
+	var itemId = req.query.itemId;
+	if (itemId) {
+		db('DELETE FROM public.item WHERE id=' + itemId, res);
 	}
-	_save();
+	else {
+		dw.sendError(res, 'PARAMERROR');
+	}
 };
 
 // 判断item是否存在
