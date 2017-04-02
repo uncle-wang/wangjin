@@ -54,28 +54,17 @@ var addCategory = function(req, res) {
 };
 
 // 删除分类
-var removeCategory = function(categoryId) {
+var removeCategory = function(req, res) {
 
-	// 删除当前category下的所有item
-	var itemList = data.itemList;
-	var i = 0;
-	while (i < itemList.length) {
-		if (itemList[i].categoryId === categoryId) {
-			itemList.splice(i, 1);
-		}
-		else {
-			i ++;
-		}
+	var categoryId = req.query.categoryId;
+	if (categoryId) {
+		db('DELETE FROM public.item WHERE category_id=' + categoryId, res, function(data) {
+			db('DELETE FROM public.category WHERE id=' + categoryId, res);
+		});
 	}
-	// 删除当前category
-	var categoryList = data.categoryList;
-	for (var j = 0; j < categoryList.length; j ++) {
-		if (categoryList[j].id === categoryId) {
-			categoryList.splice(j, 1);
-			break;
-		}
+	else {
+		dw.sendError(res, 'PARAMERROR');
 	}
-	_save();
 };
 
 // 判断分类是否存在

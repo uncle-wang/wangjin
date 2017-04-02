@@ -23,14 +23,7 @@ var route = function(app) {
 
 	.get('/api/fx/removeCategory', function(req, res) {
 
-		var categoryId = req.query.categoryId;
-		if (categoryId && fx.exsistCategory(categoryId)) {
-			fx.removeCategory(categoryId);
-			dw.sendData(res);
-		}
-		else {
-			dw.sendError(res, 'PARAMERROR');
-		}
+		fx.removeCategory(req, res);
 	})
 
 	.get('/api/fx/addItem', function(req, res) {

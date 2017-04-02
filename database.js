@@ -31,7 +31,7 @@ var config = {
 
 var pool = new pg.Pool(config);
 
-module.exports = function(querystr, res) {
+module.exports = function(querystr, res, callback) {
 
 	// 连接数据库
 	pool.connect(function(err, client, done) {
@@ -48,7 +48,12 @@ module.exports = function(querystr, res) {
 				console.error('error running query', err);
 			}
 			else {
-				dw.sendData(res, result.rows);
+				if (callback) {
+					callback(result.rows);
+				}
+				else {
+					dw.sendData(res, result.rows);
+				}
 			}
 		});
 	});
