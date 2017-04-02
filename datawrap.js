@@ -2,7 +2,8 @@ var STATUS = {
 
 	SUCCESS: 0,
 	APINOTFOUND: 1,
-	PARAMERROR: 2
+	PARAMERROR: 2,
+	SERVERERROR: 3
 };
 
 module.exports = {

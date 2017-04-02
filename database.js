@@ -1,4 +1,5 @@
 var pg = require('pg');
+var dw = require('./datawrap');
 
 // 解析DATABASE_URL
 var databaseUrl = process.env.DATABASE_URL || 'postgres://postgres:root@localhost:5433/postgres';
@@ -30,7 +31,7 @@ var config = {
 
 var pool = new pg.Pool(config);
 
-module.exports = function(querystr, callback) {
+module.exports = function(querystr, res) {
 
 	// 连接数据库
 	pool.connect(function(err, client, done) {
@@ -43,17 +44,18 @@ module.exports = function(querystr, callback) {
 			done(err);
 
 			if(err) {
-				callback(err);
-				return console.error('error running query', err);
+				dw.sendError(res, 'SERVERERROR');
+				console.error('error running query', err);
 			}
-
-			// 执行回调
-			callback(result.rows);
+			else {
+				dw.sendData(res, result.rows);
+			}
 		});
 	});
 
 	pool.on('error', function (err, client) {
 
+		dw.sendError(res, 'SERVERERROR');
 		console.error('idle client error', err.message, err.stack);
 	});
 };
