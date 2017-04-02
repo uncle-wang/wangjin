@@ -39,12 +39,6 @@ var getCategoryList = function(req, res) {
 // 增加分类
 var addCategory = function(req, res) {
 
-	var categoryIndex = data.index.category;
-	var categoryId = _selfIncrease(categoryIndex);
-	data.categoryList.push({id: categoryId, name: categoryName});
-	data.index.category = categoryId;
-	_save();
-
 	var categoryName = req.query.categoryName;
 	var description = req.query.description;
 	if (categoryName) {
