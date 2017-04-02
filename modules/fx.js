@@ -124,7 +124,7 @@ var addItem = function(req, res) {
 	var description = req.query.description;
 	if (categoryId && itemName) {
 		var column = 'name, category_id';
-		var value = '\'' + itemName + '\'' + ', \'' + categoryId + '\'';
+		var value = '\'' + itemName + '\', ' + categoryId;
 		if (description) {
 			column += ', description';
 			value += ', \'' + description + '\'';
