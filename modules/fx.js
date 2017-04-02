@@ -121,9 +121,14 @@ var addItem = function(req, res) {
 	var categoryId = req.query.categoryId;
 	var itemName = req.query.itemName;
 	var notes = req.query.notes;
+	var description = req.query.description;
 	if (categoryId && itemName) {
 		var column = 'name, category_id';
 		var value = '\'' + itemName + '\'' + ', \'' + categoryId + '\'';
+		if (description) {
+			column += ', description';
+			value += ', \'' + description + '\'';
+		}
 		if (notes) {
 			notes = notes.replace('[', '{');
 			notes = notes.replace(']', '}');
