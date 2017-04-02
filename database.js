@@ -1,7 +1,7 @@
 var pg = require('pg');
 
 // 解析DATABASE_URL
-var databaseUrl = process.env.DATABASE_URL;
+var databaseUrl = process.env.DATABASE_URL || 'postgres://postgres:root@localhost:5433/postgres';
 var str = databaseUrl.substr(11);
 var pos = str.indexOf(':');
 var user = str.substring(0, pos);
