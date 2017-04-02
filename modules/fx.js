@@ -1,32 +1,5 @@
-var fs = require('fs');
-var fp = require('./../filepath');
 var db = require('./../database');
 var dw = require('./../datawrap');
-
-// 数据文件路径
-var configFileName = fp.config('fx_data');
-
-// 从文件读取数据
-var data = JSON.parse(fs.readFileSync(configFileName, 'utf8'));
-
-// id自增
-var _selfIncrease = function(id) {
-
-	var prefix = '';
-	var newIdNumber = (Number(id) + 1).toString();
-	var prefixLength = 8 - newIdNumber.length;
-	while (prefixLength > 0) {
-		prefix += '0';
-		prefixLength --;
-	}
-	return prefix + newIdNumber;
-};
-
-// 保存文件
-var _save = function() {
-
-	fs.writeFileSync(configFileName, JSON.stringify(data), 'utf8');
-};
 
 // 查询分类列表
 var getCategoryList = function(req, res) {
@@ -67,18 +40,6 @@ var removeCategory = function(req, res) {
 	}
 };
 
-// 判断分类是否存在
-var exsistCategory = function(categoryId) {
-
-	var categoryList = data.categoryList;
-	for (var i = 0; i < categoryList.length; i ++) {
-		if (categoryList[i].id === categoryId) {
-			return true;
-		}
-	}
-	return false;
-};
-
 // 查询item列表
 var getItemListByCategoryId = function(req, res) {
 
@@ -101,18 +62,6 @@ var removeItem = function(req, res) {
 	else {
 		dw.sendError(res, 'PARAMERROR');
 	}
-};
-
-// 判断item是否存在
-var exsistItem = function(itemId) {
-
-	var itemList = data.itemList;
-	for (var i = 0; i < itemList.length; i ++) {
-		if (itemList[i].id === itemId) {
-			return true;
-		}
-	}
-	return false;
 };
 
 // 增加item
@@ -147,10 +96,8 @@ module.exports = {
 
 	addItem: addItem,
 	removeItem: removeItem,
-	exsistItem: exsistItem,
 	addCategory: addCategory,
 	removeCategory: removeCategory,
-	exsistCategory: exsistCategory,
 	getCategoryList: getCategoryList,
 	getItemListByCategoryId: getItemListByCategoryId
 };

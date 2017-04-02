@@ -1,6 +1,5 @@
 var fp = require('./../filepath');
 var fx = require(fp.module('fx'));
-var dw = require('./../datawrap');
 
 var route = function(app) {
 
