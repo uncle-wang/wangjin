@@ -152,6 +152,7 @@ bool _aabAvailable(string group[]) {
 	double priceA = MarketInfo(group[0], MODE_ASK);
 	double priceB = MarketInfo(group[1], MODE_ASK);
 	double priceC = MarketInfo(group[2], MODE_BID);
+	// TO DO 小数点位计算...
 	if (priceA * priceB - priceC - spreadCost >= pips) {
 		return true;
 	}
