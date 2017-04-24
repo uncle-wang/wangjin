@@ -189,7 +189,46 @@ void createOrder() {
 // 关闭对冲订单
 void closeOrder() {
 
-	//
+	// 手数
+	double lotsA = 0;
+	double lotsB = 0;
+	double lotsC = 0;
+	// 平仓价格
+	double priceA = 0;
+	double priceB = 0;
+	double priceC = 0;
+
+	if (OrderSelect(orderTicket[0], SELECT_BY_TICKET) == true) {
+		lotsA = OrderLots();
+	}
+	if (OrderSelect(orderTicket[1], SELECT_BY_TICKET) == true) {
+		lotsB = OrderLots();
+	}
+	if (OrderSelect(orderTicket[2], SELECT_BY_TICKET) == true) {
+		lotsC = OrderLots();
+	}
+	// AAB/BBA两种情况
+	if (orderType == "AAB") {
+		priceA = MarketInfo(symbols[0], MODE_BID);
+		priceB = MarketInfo(symbols[1], MODE_BID);
+		priceC = MarketInfo(symbols[2], MODE_ASK);
+	}
+	else {
+		priceA = MarketInfo(symbols[0], MODE_ASK);
+		priceB = MarketInfo(symbols[1], MODE_ASK);
+		priceC = MarketInfo(symbols[2], MODE_BID);
+	}
+
+	// 平仓
+	if (!OrderClose(orderTicket[0], lotsA, priceA, 5, CLR_NONE)) {
+		Print(GetLastError());
+	}
+	if (!OrderClose(orderTicket[1], lotsB, priceB, 5, CLR_NONE)) {
+		Print(GetLastError());
+	}
+	if (!OrderClose(orderTicket[2], lotsC, priceC, 5, CLR_NONE)) {
+		Print(GetLastError());
+	}
 }
 
 //+------------------------------------------------------------------+
