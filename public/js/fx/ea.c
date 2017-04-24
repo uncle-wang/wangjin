@@ -129,12 +129,48 @@ string symbolGroups[][3] = {
 
 // 是否已存在对冲订单
 bool existEaOrder = false;
+// 订单货币对
+string symbols[] = {};
+// 订单号
+int orderTicket[] = {};
+// 订单类型：AAB/BBA
+string orderType = "";
+// pips
+double pips = 0;
+// 手数
+double lots = 0;
 
 // 对冲订单是否符合盈利出场条件
 bool canBeClosed() {
 
-	//
-	return false;
+	bool flag = false;
+	// 点差
+	double spreadA = MarketInfo(symbols[0], MODE_SPREAD);
+	double spreadB = MarketInfo(symbols[1], MODE_SPREAD);
+	double spreadC = MarketInfo(symbols[2], MODE_SPREAD);
+	double spreadCost = spreadA + spreadB + spreadC;
+	// 当前平仓价格
+	double priceA = 0;
+	double priceB = 0;
+	double priceC = 0;
+	// AAB/BBA两种情况
+	if (orderType == "AAB") {
+		priceA = MarketInfo(symbols[0], MODE_BID);
+		priceB = MarketInfo(symbols[1], MODE_BID);
+		priceC = MarketInfo(symbols[2], MODE_ASK);
+		if (priceC - priceA * priceB >= spreadCost) {
+			flag = true;
+		}
+	}
+	else {
+		priceA = MarketInfo(symbols[0], MODE_ASK);
+		priceB = MarketInfo(symbols[1], MODE_ASK);
+		priceC = MarketInfo(symbols[2], MODE_BID);
+		if (priceA * priceB - priceC >= spreadCost) {
+			flag = true;
+		}
+	}
+	return flag;
 }
 
 // 是否存在可盈利的对冲组合
