@@ -136,9 +136,45 @@ int orderTicket[] = {};
 // 订单类型：AAB/BBA
 string orderType = "";
 // pips
-double pips = 0;
+double pips = 10;
 // 手数
 double lots = 0;
+
+// 是否可以以AAB模式开仓
+bool _aabAvailable(string group[]) {
+
+	// 点差
+	double spreadA = MarketInfo(group[0], MODE_SPREAD);
+	double spreadB = MarketInfo(group[1], MODE_SPREAD);
+	double spreadC = MarketInfo(group[2], MODE_SPREAD);
+	double spreadCost = spreadA + spreadB + spreadC;
+	// 开仓价格
+	double priceA = MarketInfo(group[0], MODE_ASK);
+	double priceB = MarketInfo(group[1], MODE_ASK);
+	double priceC = MarketInfo(group[2], MODE_BID);
+	if (priceA * priceB - priceC - spreadCost >= pips) {
+		return true;
+	}
+	return false;
+}
+
+// 是否可以以BBA模式开仓
+bool _bbaAvailable(string group[]) {
+
+	// 点差
+	double spreadA = MarketInfo(group[0], MODE_SPREAD);
+	double spreadB = MarketInfo(group[1], MODE_SPREAD);
+	double spreadC = MarketInfo(group[2], MODE_SPREAD);
+	double spreadCost = spreadA + spreadB + spreadC;
+	// 开仓价格
+	double priceA = MarketInfo(group[0], MODE_BID);
+	double priceB = MarketInfo(group[1], MODE_BID);
+	double priceC = MarketInfo(group[2], MODE_ASK);
+	if (priceC - priceA * priceB - spreadCost >= pips) {
+		return true;
+	}
+	return false;
+}
 
 // 对冲订单是否符合盈利出场条件
 bool canBeClosed() {
@@ -172,17 +208,27 @@ bool canBeClosed() {
 	return false;
 }
 
-// 是否存在可盈利的对冲组合
-bool eaPriceAvailable() {
+// 创建对冲订单
+void createOrder(string model, string group[]) {
 
 	//
-	return false;
 }
 
-// 创建对冲订单
-void createOrder() {
+// 是否存在可盈利的对冲组合
+void eaPriceAvailable() {
 
-	//
+	for (int i = 0; i < ArrayRange(symbolGroups, 0)) {
+		group = symbolGroups[i];
+		if (_aabAvailable(group)) {
+			createOrder('AAB', group);
+			return;
+		}
+		else if (_bbaAvailable(group)) {
+			createOrder('BBA', group);
+			return;
+		}
+	}
+	return;
 }
 
 // 关闭对冲订单
