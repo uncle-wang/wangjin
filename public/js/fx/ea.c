@@ -211,7 +211,8 @@ bool canBeClosed() {
 // 创建对冲订单
 void createOrder(string model, string group[]) {
 
-	//
+	double buyPrice = MarketInfo("USDJYP", MODE_ASK);
+	OrderSend( "USDJYP", OP_BUY, 1, buyPrice, 5, buyPrice - 30, buyPrice + 30, "a buy order", 11, 0, CLR_NONE);
 }
 
 // 是否存在可盈利的对冲组合
