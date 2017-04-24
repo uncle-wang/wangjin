@@ -10,121 +10,121 @@
 
 string symbolGroups[][3] = {
 
-	'AUDCAD', 'CADJPY', 'AUDJPY',
-	'EURAUD', 'AUDCAD', 'EURCAD',
-	'GBPAUD', 'AUDCAD', 'GBPCAD',
-	'AUDUSD', 'USDCAD', 'AUDCAD',
-	'AUDCHF', 'CHFJPY', 'AUDJPY',
-	'EURAUD', 'AUDCHF', 'EURCHF',
-	'GBPAUD', 'AUDCHF', 'GBPCHF',
-	'AUDUSD', 'USDCHF', 'AUDCHF',
-	'AUDCAD', 'CADJPY', 'AUDJPY',
-	'AUDCHF', 'CHFJPY', 'AUDJPY',
-	'EURAUD', 'AUDJPY', 'EURJPY',
-	'GBPAUD', 'AUDJPY', 'GBPJPY',
-	'AUDNZD', 'NZDJPY', 'AUDJPY',
-	'AUDUSD', 'USDJPY', 'AUDJPY',
-	'EURAUD', 'AUDNZD', 'EURNZD',
-	'GBPAUD', 'AUDNZD', 'GBPNZD',
-	'AUDNZD', 'NZDUSD', 'AUDUSD',
-	'EURAUD', 'AUDUSD', 'EURUSD',
-	'GBPAUD', 'AUDUSD', 'GBPUSD',
-	'AUDUSD', 'USDCAD', 'AUDCAD',
-	'AUDUSD', 'USDCHF', 'AUDCHF',
-	'AUDUSD', 'USDJPY', 'AUDJPY',
-	'AUDCAD', 'CADJPY', 'AUDJPY',
-	'EURCAD', 'CADJPY', 'EURJPY',
-	'GBPCAD', 'CADJPY', 'GBPJPY',
-	'USDCAD', 'CADJPY', 'USDJPY',
-	'AUDCHF', 'CHFJPY', 'AUDJPY',
-	'EURCHF', 'CHFJPY', 'EURJPY',
-	'GBPCHF', 'CHFJPY', 'GBPJPY',
-	'EURAUD', 'AUDCAD', 'EURCAD',
-	'EURAUD', 'AUDCHF', 'EURCHF',
-	'EURAUD', 'AUDJPY', 'EURJPY',
-	'EURAUD', 'AUDNZD', 'EURNZD',
-	'EURAUD', 'AUDUSD', 'EURUSD',
-	'EURGBP', 'GBPAUD', 'EURAUD',
-	'EURAUD', 'AUDCAD', 'EURCAD',
-	'EURCAD', 'CADJPY', 'EURJPY',
-	'EURUSD', 'USDCAD', 'EURCAD',
-	'EURAUD', 'AUDCHF', 'EURCHF',
-	'EURCHF', 'CHFJPY', 'EURJPY',
-	'EURGBP', 'GBPCHF', 'EURCHF',
-	'EURUSD', 'USDCHF', 'EURCHF',
-	'EURGBP', 'GBPAUD', 'EURAUD',
-	'EURGBP', 'GBPCAD', 'EURCAD',
-	'EURGBP', 'GBPCHF', 'EURCHF',
-	'EURGBP', 'GBPJPY', 'EURJPY',
-	'EURGBP', 'GBPNZD', 'EURNZD',
-	'EURGBP', 'GBPUSD', 'EURUSD',
-	'EURAUD', 'AUDJPY', 'EURJPY',
-	'EURCAD', 'CADJPY', 'EURJPY',
-	'EURCHF', 'CHFJPY', 'EURJPY',
-	'EURGBP', 'GBPJPY', 'EURJPY',
-	'EURNZD', 'NZDJPY', 'EURJPY',
-	'EURUSD', 'USDJPY', 'EURJPY',
-	'EURAUD', 'AUDNZD', 'EURNZD',
-	'EURGBP', 'GBPNZD', 'EURNZD',
-	'EURNZD', 'NZDJPY', 'EURJPY',
-	'EURNZD', 'NZDUSD', 'EURUSD',
-	'EURAUD', 'AUDUSD', 'EURUSD',
-	'EURNZD', 'NZDUSD', 'EURUSD',
-	'EURUSD', 'USDCAD', 'EURCAD',
-	'EURUSD', 'USDCHF', 'EURCHF',
-	'EURUSD', 'USDJPY', 'EURJPY',
-	'GBPAUD', 'AUDCAD', 'GBPCAD',
-	'GBPAUD', 'AUDCHF', 'GBPCHF',
-	'GBPAUD', 'AUDJPY', 'GBPJPY',
-	'GBPAUD', 'AUDNZD', 'GBPNZD',
-	'GBPAUD', 'AUDUSD', 'GBPUSD',
-	'EURGBP', 'GBPAUD', 'EURAUD',
-	'GBPAUD', 'AUDCAD', 'GBPCAD',
-	'GBPCAD', 'CADJPY', 'GBPJPY',
-	'EURGBP', 'GBPCAD', 'EURCAD',
-	'GBPUSD', 'USDCAD', 'GBPCAD',
-	'GBPAUD', 'AUDCHF', 'GBPCHF',
-	'GBPCHF', 'CHFCHF', 'GBPCHF',
-	'EURGBP', 'GBPCHF', 'EURCHF',
-	'GBPUSD', 'USDCHF', 'GBPCHF',
-	'GBPAUD', 'AUDJPY', 'GBPJPY',
-	'GBPCAD', 'CADJPY', 'GBPJPY',
-	'GBPCHF', 'CHFJPY', 'GBPJPY',
-	'EURGBP', 'GBPJPY', 'EURJPY',
-	'GBPNZD', 'NZDJPY', 'GBPJPY',
-	'GBPUSD', 'USDJPY', 'GBPJPY',
-	'GBPAUD', 'AUDNZD', 'GBPNZD',
-	'EURGBP', 'GBPNZD', 'EURNZD',
-	'GBPNZD', 'NZDJPY', 'GBPJPY',
-	'GBPNZD', 'NZDUSD', 'GBPUSD',
-	'GBPAUD', 'AUDUSD', 'GBPUSD',
-	'EURGBP', 'GBPUSD', 'EURUSD',
-	'GBPNZD', 'NZDUSD', 'GBPUSD',
-	'GBPUSD', 'USDCAD', 'GBPCAD',
-	'GBPUSD', 'USDCHF', 'GBPCHF',
-	'GBPUSD', 'USDJPY', 'GBPJPY',
-	'AUDNZD', 'NZDJPY', 'AUDJPY',
-	'EURNZD', 'NZDJPY', 'EURJPY',
-	'GBPNZD', 'NZDJPY', 'GBPJPY',
-	'NZDUSD', 'USDJPY', 'NZDJPY',
-	'AUDNZD', 'NZDUSD', 'AUDUSD',
-	'EURNZD', 'NZDUSD', 'EURUSD',
-	'GBPNZD', 'NZDUSD', 'GBPUSD',
-	'NZDUSD', 'USDJPY', 'NZDJPY',
-	'AUDUSD', 'USDCAD', 'AUDCAD',
-	'USDCAD', 'CADJPY', 'USDJPY',
-	'EURUSD', 'USDCAD', 'EURCAD',
-	'GBPUSD', 'USDCAD', 'GBPCAD',
-	'AUDUSD', 'USDCHF', 'AUDCHF',
-	'USDCHF', 'CHFCHF', 'USDCHF',
-	'EURUSD', 'USDCHF', 'EURCHF',
-	'GBPUSD', 'USDCHF', 'GBPCHF',
-	'AUDUSD', 'USDJPY', 'AUDJPY',
-	'USDCAD', 'CADJPY', 'USDJPY',
-	'USDCHF', 'CHFJPY', 'USDJPY',
-	'EURUSD', 'USDJPY', 'EURJPY',
-	'GBPUSD', 'USDJPY', 'GBPJPY',
-	'NZDUSD', 'USDJPY', 'NZDJPY'
+	"AUDCAD", "CADJPY", "AUDJPY",
+	"EURAUD", "AUDCAD", "EURCAD",
+	"GBPAUD", "AUDCAD", "GBPCAD",
+	"AUDUSD", "USDCAD", "AUDCAD",
+	"AUDCHF", "CHFJPY", "AUDJPY",
+	"EURAUD", "AUDCHF", "EURCHF",
+	"GBPAUD", "AUDCHF", "GBPCHF",
+	"AUDUSD", "USDCHF", "AUDCHF",
+	"AUDCAD", "CADJPY", "AUDJPY",
+	"AUDCHF", "CHFJPY", "AUDJPY",
+	"EURAUD", "AUDJPY", "EURJPY",
+	"GBPAUD", "AUDJPY", "GBPJPY",
+	"AUDNZD", "NZDJPY", "AUDJPY",
+	"AUDUSD", "USDJPY", "AUDJPY",
+	"EURAUD", "AUDNZD", "EURNZD",
+	"GBPAUD", "AUDNZD", "GBPNZD",
+	"AUDNZD", "NZDUSD", "AUDUSD",
+	"EURAUD", "AUDUSD", "EURUSD",
+	"GBPAUD", "AUDUSD", "GBPUSD",
+	"AUDUSD", "USDCAD", "AUDCAD",
+	"AUDUSD", "USDCHF", "AUDCHF",
+	"AUDUSD", "USDJPY", "AUDJPY",
+	"AUDCAD", "CADJPY", "AUDJPY",
+	"EURCAD", "CADJPY", "EURJPY",
+	"GBPCAD", "CADJPY", "GBPJPY",
+	"USDCAD", "CADJPY", "USDJPY",
+	"AUDCHF", "CHFJPY", "AUDJPY",
+	"EURCHF", "CHFJPY", "EURJPY",
+	"GBPCHF", "CHFJPY", "GBPJPY",
+	"EURAUD", "AUDCAD", "EURCAD",
+	"EURAUD", "AUDCHF", "EURCHF",
+	"EURAUD", "AUDJPY", "EURJPY",
+	"EURAUD", "AUDNZD", "EURNZD",
+	"EURAUD", "AUDUSD", "EURUSD",
+	"EURGBP", "GBPAUD", "EURAUD",
+	"EURAUD", "AUDCAD", "EURCAD",
+	"EURCAD", "CADJPY", "EURJPY",
+	"EURUSD", "USDCAD", "EURCAD",
+	"EURAUD", "AUDCHF", "EURCHF",
+	"EURCHF", "CHFJPY", "EURJPY",
+	"EURGBP", "GBPCHF", "EURCHF",
+	"EURUSD", "USDCHF", "EURCHF",
+	"EURGBP", "GBPAUD", "EURAUD",
+	"EURGBP", "GBPCAD", "EURCAD",
+	"EURGBP", "GBPCHF", "EURCHF",
+	"EURGBP", "GBPJPY", "EURJPY",
+	"EURGBP", "GBPNZD", "EURNZD",
+	"EURGBP", "GBPUSD", "EURUSD",
+	"EURAUD", "AUDJPY", "EURJPY",
+	"EURCAD", "CADJPY", "EURJPY",
+	"EURCHF", "CHFJPY", "EURJPY",
+	"EURGBP", "GBPJPY", "EURJPY",
+	"EURNZD", "NZDJPY", "EURJPY",
+	"EURUSD", "USDJPY", "EURJPY",
+	"EURAUD", "AUDNZD", "EURNZD",
+	"EURGBP", "GBPNZD", "EURNZD",
+	"EURNZD", "NZDJPY", "EURJPY",
+	"EURNZD", "NZDUSD", "EURUSD",
+	"EURAUD", "AUDUSD", "EURUSD",
+	"EURNZD", "NZDUSD", "EURUSD",
+	"EURUSD", "USDCAD", "EURCAD",
+	"EURUSD", "USDCHF", "EURCHF",
+	"EURUSD", "USDJPY", "EURJPY",
+	"GBPAUD", "AUDCAD", "GBPCAD",
+	"GBPAUD", "AUDCHF", "GBPCHF",
+	"GBPAUD", "AUDJPY", "GBPJPY",
+	"GBPAUD", "AUDNZD", "GBPNZD",
+	"GBPAUD", "AUDUSD", "GBPUSD",
+	"EURGBP", "GBPAUD", "EURAUD",
+	"GBPAUD", "AUDCAD", "GBPCAD",
+	"GBPCAD", "CADJPY", "GBPJPY",
+	"EURGBP", "GBPCAD", "EURCAD",
+	"GBPUSD", "USDCAD", "GBPCAD",
+	"GBPAUD", "AUDCHF", "GBPCHF",
+	"GBPCHF", "CHFCHF", "GBPCHF",
+	"EURGBP", "GBPCHF", "EURCHF",
+	"GBPUSD", "USDCHF", "GBPCHF",
+	"GBPAUD", "AUDJPY", "GBPJPY",
+	"GBPCAD", "CADJPY", "GBPJPY",
+	"GBPCHF", "CHFJPY", "GBPJPY",
+	"EURGBP", "GBPJPY", "EURJPY",
+	"GBPNZD", "NZDJPY", "GBPJPY",
+	"GBPUSD", "USDJPY", "GBPJPY",
+	"GBPAUD", "AUDNZD", "GBPNZD",
+	"EURGBP", "GBPNZD", "EURNZD",
+	"GBPNZD", "NZDJPY", "GBPJPY",
+	"GBPNZD", "NZDUSD", "GBPUSD",
+	"GBPAUD", "AUDUSD", "GBPUSD",
+	"EURGBP", "GBPUSD", "EURUSD",
+	"GBPNZD", "NZDUSD", "GBPUSD",
+	"GBPUSD", "USDCAD", "GBPCAD",
+	"GBPUSD", "USDCHF", "GBPCHF",
+	"GBPUSD", "USDJPY", "GBPJPY",
+	"AUDNZD", "NZDJPY", "AUDJPY",
+	"EURNZD", "NZDJPY", "EURJPY",
+	"GBPNZD", "NZDJPY", "GBPJPY",
+	"NZDUSD", "USDJPY", "NZDJPY",
+	"AUDNZD", "NZDUSD", "AUDUSD",
+	"EURNZD", "NZDUSD", "EURUSD",
+	"GBPNZD", "NZDUSD", "GBPUSD",
+	"NZDUSD", "USDJPY", "NZDJPY",
+	"AUDUSD", "USDCAD", "AUDCAD",
+	"USDCAD", "CADJPY", "USDJPY",
+	"EURUSD", "USDCAD", "EURCAD",
+	"GBPUSD", "USDCAD", "GBPCAD",
+	"AUDUSD", "USDCHF", "AUDCHF",
+	"USDCHF", "CHFCHF", "USDCHF",
+	"EURUSD", "USDCHF", "EURCHF",
+	"GBPUSD", "USDCHF", "GBPCHF",
+	"AUDUSD", "USDJPY", "AUDJPY",
+	"USDCAD", "CADJPY", "USDJPY",
+	"USDCHF", "CHFJPY", "USDJPY",
+	"EURUSD", "USDJPY", "EURJPY",
+	"GBPUSD", "USDJPY", "GBPJPY",
+	"NZDUSD", "USDJPY", "NZDJPY"
 };
 
 // 是否已存在对冲订单
@@ -141,7 +141,7 @@ double pips = 10;
 double lots = 0;
 
 // 是否可以以AAB模式开仓
-bool _aabAvailable(string group[]) {
+bool _aabAvailable(string& group[]) {
 
 	// 点差
 	double spreadA = MarketInfo(group[0], MODE_SPREAD);
@@ -160,7 +160,7 @@ bool _aabAvailable(string group[]) {
 }
 
 // 是否可以以BBA模式开仓
-bool _bbaAvailable(string group[]) {
+bool _bbaAvailable(string& group[]) {
 
 	// 点差
 	double spreadA = MarketInfo(group[0], MODE_SPREAD);
@@ -210,23 +210,29 @@ bool canBeClosed() {
 }
 
 // 创建对冲订单
-void createOrder(string model, string group[]) {
+void createOrder(string model, string& group[]) {
 
 	double buyPrice = MarketInfo("USDJYP", MODE_ASK);
-	OrderSend( "USDJYP", OP_BUY, 1, buyPrice, 5, buyPrice - 30, buyPrice + 30, "a buy order", 11, 0, CLR_NONE);
+	int res = OrderSend( "USDJYP", OP_BUY, 1, buyPrice, 5, buyPrice - 30, buyPrice + 30, "a buy order", 11, 0, CLR_NONE);
+	if (res == -1) {
+		GetLastError();
+	}
 }
 
 // 是否存在可盈利的对冲组合
 void eaPriceAvailable() {
 
-	for (int i = 0; i < ArrayRange(symbolGroups, 0)) {
-		group = symbolGroups[i];
+	for (int i = 0; i < ArrayRange(symbolGroups, 0); i ++) {
+		string group[3] = {};
+		group[0] = symbolGroups[i][0];
+		group[1] = symbolGroups[i][1];
+		group[2] = symbolGroups[i][2];
 		if (_aabAvailable(group)) {
-			createOrder('AAB', group);
+			createOrder("AAB", group);
 			return;
 		}
 		else if (_bbaAvailable(group)) {
-			createOrder('BBA', group);
+			createOrder("BBA", group);
 			return;
 		}
 	}
@@ -283,15 +289,6 @@ void closeOrder() {
 //+------------------------------------------------------------------+
 int OnInit() {
 
-	for (int i = 0; i < ArrayRange(symbolGroups, 0); i ++) {
-		for (int j = 0; j < ArrayRange(symbolGroups, 1); j ++) {
-			string symbol = symbolGroups[i][j];
-			double price = MarketInfo(symbol, MODE_BID);
-			if (price == 0) {
-				Print(symbol, "-", MarketInfo(symbolGroups[i][j], MODE_BID));
-			}
-		}
-	}
 	//--- create timer
 	EventSetTimer(60);
 	//---
@@ -317,9 +314,7 @@ void OnTick() {
 		}
 	}
 	else {
-		if (eaPriceAvailable()) {
-			createOrder();
-		}
+		eaPriceAvailable();
 	}
 }
 
