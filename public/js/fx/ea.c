@@ -143,7 +143,6 @@ double lots = 0;
 // 对冲订单是否符合盈利出场条件
 bool canBeClosed() {
 
-	bool flag = false;
 	// 点差
 	double spreadA = MarketInfo(symbols[0], MODE_SPREAD);
 	double spreadB = MarketInfo(symbols[1], MODE_SPREAD);
@@ -159,7 +158,7 @@ bool canBeClosed() {
 		priceB = MarketInfo(symbols[1], MODE_BID);
 		priceC = MarketInfo(symbols[2], MODE_ASK);
 		if (priceC - priceA * priceB >= spreadCost) {
-			flag = true;
+			return true;
 		}
 	}
 	else {
@@ -167,10 +166,10 @@ bool canBeClosed() {
 		priceB = MarketInfo(symbols[1], MODE_ASK);
 		priceC = MarketInfo(symbols[2], MODE_BID);
 		if (priceA * priceB - priceC >= spreadCost) {
-			flag = true;
+			return true;
 		}
 	}
-	return flag;
+	return false;
 }
 
 // 是否存在可盈利的对冲组合
