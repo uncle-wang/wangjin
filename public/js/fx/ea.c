@@ -220,7 +220,7 @@ void eaPriceAvailable() {
 		double spreadC = MarketInfo(group[2], MODE_SPREAD);
 		double spreadCost = spreadA + spreadB + spreadC;
 		// 价格小数点位
-		double digitsNumb = MarketInfo(group[2], MODE_DIGITS);
+		double digitsNumb = MathPow(10, MarketInfo(group[2], MODE_DIGITS));
 		if (_aabAvailable(group, spreadCost, digitsNumb)) {
 			createOrder("AAB", group);
 			return;
