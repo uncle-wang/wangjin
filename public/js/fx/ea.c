@@ -136,42 +136,31 @@ int orderTicket[] = {};
 // 订单类型：AAB/BBA
 string orderType = "";
 // pips
-double pips = 10;
+double pips = 500;
 // 手数
 double lots = 0;
 
 // 是否可以以AAB模式开仓
-bool _aabAvailable(string& group[]) {
+bool _aabAvailable(string& group[], double spreadCost, double digitsNumb) {
 
-	// 点差
-	double spreadA = MarketInfo(group[0], MODE_SPREAD);
-	double spreadB = MarketInfo(group[1], MODE_SPREAD);
-	double spreadC = MarketInfo(group[2], MODE_SPREAD);
-	double spreadCost = spreadA + spreadB + spreadC;
 	// 开仓价格
 	double priceA = MarketInfo(group[0], MODE_ASK);
 	double priceB = MarketInfo(group[1], MODE_ASK);
 	double priceC = MarketInfo(group[2], MODE_BID);
-	// TO DO 小数点位计算...
-	if (priceA * priceB - priceC - spreadCost >= pips) {
+	if ((priceC -  priceA * priceB) * digitsNumb - spreadCost >= pips) {
 		return true;
 	}
 	return false;
 }
 
 // 是否可以以BBA模式开仓
-bool _bbaAvailable(string& group[]) {
+bool _bbaAvailable(string& group[], double spreadCost, double digitsNumb) {
 
-	// 点差
-	double spreadA = MarketInfo(group[0], MODE_SPREAD);
-	double spreadB = MarketInfo(group[1], MODE_SPREAD);
-	double spreadC = MarketInfo(group[2], MODE_SPREAD);
-	double spreadCost = spreadA + spreadB + spreadC;
 	// 开仓价格
 	double priceA = MarketInfo(group[0], MODE_BID);
 	double priceB = MarketInfo(group[1], MODE_BID);
 	double priceC = MarketInfo(group[2], MODE_ASK);
-	if (priceC - priceA * priceB - spreadCost >= pips) {
+	if ((priceA * priceB - priceC) * digitsNumb - spreadCost >= pips) {
 		return true;
 	}
 	return false;
@@ -227,11 +216,18 @@ void eaPriceAvailable() {
 		group[0] = symbolGroups[i][0];
 		group[1] = symbolGroups[i][1];
 		group[2] = symbolGroups[i][2];
-		if (_aabAvailable(group)) {
+		// 点差
+		double spreadA = MarketInfo(group[0], MODE_SPREAD);
+		double spreadB = MarketInfo(group[1], MODE_SPREAD);
+		double spreadC = MarketInfo(group[2], MODE_SPREAD);
+		double spreadCost = spreadA + spreadB + spreadC;
+		// 价格小数点位
+		double digitsNumb = MarketInfo(group[2], MODE_DIGITS);
+		if (_aabAvailable(group, spreadCost, digitsNumb)) {
 			createOrder("AAB", group);
 			return;
 		}
-		else if (_bbaAvailable(group)) {
+		else if (_bbaAvailable(group, spreadCost, digitsNumb)) {
 			createOrder("BBA", group);
 			return;
 		}
