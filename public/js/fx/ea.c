@@ -197,12 +197,45 @@ bool canBeClosed() {
 }
 
 // 创建对冲订单
-void createOrder(string model, string& group[]) {
+void createOrder(string type, string& group[]) {
 
-	double buyPrice = MarketInfo("USDJYP", MODE_ASK);
-	int res = OrderSend( "USDJYP", OP_BUY, 1, buyPrice, 5, buyPrice - 30, buyPrice + 30, "a buy order", 11, 0, CLR_NONE);
-	if (res == -1) {
-		GetLastError();
+	int orderA, orderB, orderC;
+	string symbolA = group[0], symbolB = group[1], symbolC = group[2];
+	double buyPriceA = MarketInfo(symbolA, MODE_ASK);
+	double buyPriceB = MarketInfo(symbolB, MODE_ASK);
+	double buyPriceC = MarketInfo(symbolC, MODE_ASK);
+	double selPriceA = MarketInfo(symbolA, MODE_BID);
+	double selPriceB = MarketInfo(symbolB, MODE_BID);
+	double selPriceC = MarketInfo(symbolC, MODE_BID);
+	if (type == "AAB") {
+		orderA = OrderSend(symbolA, OP_BUY, lots, buyPriceA, 20, buyPriceA - 300, buyPriceA + 300, "", 1001, 0, CLR_NONE);
+		if (orderA < 0) {
+			Print("Error: ", GetLastError());
+		}
+		orderB = OrderSend(symbolB, OP_BUY, lots, buyPriceB, 20, buyPriceB - 300, buyPriceB + 300, "", 1002, 0, CLR_NONE);
+		if (orderB < 0) {
+			Print("Error: ", GetLastError());
+		}
+		orderC = OrderSend(symbolC, OP_SELL, lots, selPriceC, 20, selPriceC + 300, selPriceC - 300, "", 1003, 0, CLR_NONE);
+		if (orderC < 0) {
+			Print("Error: ", GetLastError());
+		}
+		return;
+	}
+	else if (type == "BBA") {
+		orderA = OrderSend(symbolA, OP_SELL, lots, selPriceA, 20, selPriceA + 300, selPriceA - 300, "", 2001, 0, CLR_NONE);
+		if (orderA < 0) {
+			Print("Error: ", GetLastError());
+		}
+		orderB = OrderSend(symbolB, OP_SELL, lots, selPriceB, 20, selPriceB + 300, selPriceB - 300, "", 2002, 0, CLR_NONE);
+		if (orderB < 0) {
+			Print("Error: ", GetLastError());
+		}
+		orderC = OrderSend(symbolC, OP_BUY, lots, buyPriceC, 20, buyPriceC - 300, buyPriceC + 300, "", 2003, 0, CLR_NONE);
+		if (orderC < 0) {
+			Print("Error: ", GetLastError());
+		}
+		return;
 	}
 }
 
