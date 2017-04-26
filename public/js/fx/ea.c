@@ -138,6 +138,14 @@ double pips = 0;
 // 手数
 double lots = 0.1;
 
+// 预定义魔术编号
+int aabMagicA = 1001;
+int aabMagicB = 1002;
+int aabMagicC = 1003;
+int bbaMagicA = 2001;
+int bbaMagicB = 2002;
+int bbaMagicC = 2003;
+
 // 是否可以以AAB模式开仓
 bool _aabAvailable(string& group[], double spreadCost, double digitsNumb) {
 
@@ -208,30 +216,30 @@ void createOrder(string type, string& group[]) {
 	double selPriceB = MarketInfo(symbolB, MODE_BID);
 	double selPriceC = MarketInfo(symbolC, MODE_BID);
 	if (type == "AAB") {
-		orderA = OrderSend(symbolA, OP_BUY, lots, buyPriceA, 20, buyPriceA - 300, buyPriceA + 300, "", 1001, 0, CLR_NONE);
+		orderA = OrderSend(symbolA, OP_BUY, lots, buyPriceA, 20, buyPriceA - 300, buyPriceA + 300, "", aabMagicA, 0, CLR_NONE);
 		if (orderA < 0) {
 			Print("Error: ", GetLastError());
 		}
-		orderB = OrderSend(symbolB, OP_BUY, lots, buyPriceB, 20, buyPriceB - 300, buyPriceB + 300, "", 1002, 0, CLR_NONE);
+		orderB = OrderSend(symbolB, OP_BUY, lots, buyPriceB, 20, buyPriceB - 300, buyPriceB + 300, "", aabMagicB, 0, CLR_NONE);
 		if (orderB < 0) {
 			Print("Error: ", GetLastError());
 		}
-		orderC = OrderSend(symbolC, OP_SELL, lots, selPriceC, 20, selPriceC + 300, selPriceC - 300, "", 1003, 0, CLR_NONE);
+		orderC = OrderSend(symbolC, OP_SELL, lots, selPriceC, 20, selPriceC + 300, selPriceC - 300, "", aabMagicC, 0, CLR_NONE);
 		if (orderC < 0) {
 			Print("Error: ", GetLastError());
 		}
 		return;
 	}
 	else if (type == "BBA") {
-		orderA = OrderSend(symbolA, OP_SELL, lots, selPriceA, 20, selPriceA + 300, selPriceA - 300, "", 2001, 0, CLR_NONE);
+		orderA = OrderSend(symbolA, OP_SELL, lots, selPriceA, 20, selPriceA + 300, selPriceA - 300, "", bbaMagicA, 0, CLR_NONE);
 		if (orderA < 0) {
 			Print("Error: ", GetLastError());
 		}
-		orderB = OrderSend(symbolB, OP_SELL, lots, selPriceB, 20, selPriceB + 300, selPriceB - 300, "", 2002, 0, CLR_NONE);
+		orderB = OrderSend(symbolB, OP_SELL, lots, selPriceB, 20, selPriceB + 300, selPriceB - 300, "", bbaMagicB, 0, CLR_NONE);
 		if (orderB < 0) {
 			Print("Error: ", GetLastError());
 		}
-		orderC = OrderSend(symbolC, OP_BUY, lots, buyPriceC, 20, buyPriceC - 300, buyPriceC + 300, "", 2003, 0, CLR_NONE);
+		orderC = OrderSend(symbolC, OP_BUY, lots, buyPriceC, 20, buyPriceC - 300, buyPriceC + 300, "", bbaMagicC, 0, CLR_NONE);
 		if (orderC < 0) {
 			Print("Error: ", GetLastError());
 		}
