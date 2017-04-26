@@ -172,6 +172,22 @@ bool _bbaAvailable(string& group[], double spreadCost, double digitsNumb) {
 	return false;
 }
 
+// 判断指定魔术编号订单是否存在
+int _getOrderByMaigc(int magicNumber) {
+
+	int orderTicket = 0;
+	int total = OrdersTotal();
+	for (int i = 0; i < total; i ++) {
+		if (OrderSelect(i, SELECT_BY_POS)) {
+			if (OrderMagicNumber() == magicNumber) {
+				orderTicket = OrderTicket();
+				break;
+			}
+		}
+	}
+	return orderTicket;
+}
+
 // 对冲订单是否符合盈利出场条件
 bool canBeClosed() {
 
