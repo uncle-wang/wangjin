@@ -134,9 +134,9 @@ int orderTicket[] = {};
 // 订单类型：AAB/BBA
 string orderType = "";
 // pips
-double pips = 500;
+double pips = 0;
 // 手数
-double lots = 0;
+double lots = 0.1;
 
 // 是否可以以AAB模式开仓
 bool _aabAvailable(string& group[], double spreadCost, double digitsNumb) {
@@ -145,7 +145,7 @@ bool _aabAvailable(string& group[], double spreadCost, double digitsNumb) {
 	double priceA = MarketInfo(group[0], MODE_ASK);
 	double priceB = MarketInfo(group[1], MODE_ASK);
 	double priceC = MarketInfo(group[2], MODE_BID);
-	if ((priceC -  priceA * priceB) * digitsNumb - spreadCost >= pips) {
+	if ((priceC - priceA * priceB) * digitsNumb - 0.5 * spreadCost >= pips) {
 		return true;
 	}
 	return false;
@@ -158,7 +158,7 @@ bool _bbaAvailable(string& group[], double spreadCost, double digitsNumb) {
 	double priceA = MarketInfo(group[0], MODE_BID);
 	double priceB = MarketInfo(group[1], MODE_BID);
 	double priceC = MarketInfo(group[2], MODE_ASK);
-	if ((priceA * priceB - priceC) * digitsNumb - spreadCost >= pips) {
+	if ((priceA * priceB - priceC) * digitsNumb - 0.5 * spreadCost >= pips) {
 		return true;
 	}
 	return false;
