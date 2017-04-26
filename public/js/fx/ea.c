@@ -181,7 +181,7 @@ bool canBeClosed() {
 		priceA = MarketInfo(symbols[0], MODE_BID);
 		priceB = MarketInfo(symbols[1], MODE_BID);
 		priceC = MarketInfo(symbols[2], MODE_ASK);
-		if (priceC - priceA * priceB >= spreadCost) {
+		if (priceC - priceA * priceB >= 0.5 * spreadCost) {
 			return true;
 		}
 	}
@@ -189,7 +189,7 @@ bool canBeClosed() {
 		priceA = MarketInfo(symbols[0], MODE_ASK);
 		priceB = MarketInfo(symbols[1], MODE_ASK);
 		priceC = MarketInfo(symbols[2], MODE_BID);
-		if (priceA * priceB - priceC >= spreadCost) {
+		if (priceA * priceB - priceC >= 0.5 * spreadCost) {
 			return true;
 		}
 	}
@@ -302,7 +302,7 @@ void OnDeinit(const int reason) {
 //+------------------------------------------------------------------+
 void OnTick() {
 
-	if (existEaOrder) {
+	if (existEaOrder == true) {
 		if (canBeClosed()) {
 			closeOrder();
 		}
