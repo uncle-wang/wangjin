@@ -8,6 +8,14 @@
 #property version   "1.00"
 #property strict
 
+// TODO TODO TODO
+// 确定平衡点及入场点
+// 确定手数关系
+// 代码规范
+// 建仓、平仓原子性
+// 止损机制
+// 价格有效性验证
+// 使用魔术编号查找订单
 string symbolGroups[][3] = {
 
 	"AUDCAD", "CADJPY", "AUDJPY",
