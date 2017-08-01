@@ -75,7 +75,7 @@ var route = function(app) {
 		for (var i = startPos; i < endPos; i ++) {
 			resCountries.push(countries[i]);
 		}
-		res.send(resCountries);
+		res.send({totalPage: 4, list: resCountries});
 	})
 
 	// 获取运营商
@@ -148,7 +148,7 @@ var route = function(app) {
 		for (var i = startPos; i < endPos; i ++) {
 			resOperators.push(operators[i]);
 		}
-		res.send(resOperators);
+		res.send({totalPage: 6, list: resOperators});
 	});
 
 	return this;
