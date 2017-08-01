@@ -2,15 +2,18 @@
 var 
 	dw = require('./datawrap'),
 	fx = require('./controllers/fx'),
+	vue = require('./controllers/vue'),
 	express = require('express'),
 	app = express();
 
 fx.route(app);
+vue.route(app);
 
 app
 
 	// 路径设置
 	.use('/resources', express.static('public'))
+	.use('/res', express.static('vue/resources'))
 
 	.set('views', './views')
 

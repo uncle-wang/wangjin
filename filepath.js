@@ -1,5 +1,10 @@
 module.exports = {
 
+	vue: function(fileName) {
+
+		return __dirname + '/vue/views/' + fileName + '.html';
+	},
+
 	view: function(fileName) {
 
 		return __dirname + '/views/' + fileName + '.html';
