@@ -29,8 +29,6 @@ Vue.component('my-header',{
             </div>\
         </div>\
         ',
-
-
 });
 
 Vue.component('slid-bar',{
@@ -38,66 +36,44 @@ Vue.component('slid-bar',{
     data:function(){
         return {
             nowpage:'',
-            pagec:'Countries',
-            pageo:'Operators',
-            dataName:''
+            navitems:[
+                {num:1,  text: 'Countries'},
+                {num:2,  text: 'Operators'}
+            ]
         }
     },
     methods:{
         pagechange:function(prmt){
             this.nowpage = prmt;
+            // 向父组件中派发事件
             this.$emit('name-change',this.nowpage);
-            //    向父组件中派发事件
         }
-    },
-    //为了给table默认数据
-    beforeMount:function(){
-        var _self = this;
-        var pagechange = function(){
-            _self.$emit('name-change',_self.pagec);
-            //    向父组件中派发事件
-        }
-        pagechange();
     },
     template:'\
         <div class="nav_bar">\
-            <button class="countries" @click="pagechange(\'Countries\')">countries</button>\
-            <button class="operators" @click="pagechange(pageo)">operators</button>\
+            <div  v-for="item in navitems">\
+                <button class="nav_list" @click="pagechange(item.text)">{{item.text}}</button>\
+            </div>\
         </div>\
         '
 });
 
 Vue.component('table-body',{
-    props:['dataName'],
-    data:function(){
-        return {
-            nowpageId:0,
-            totalPage:'',
-            pagesize:'',
-            dataList:'',
-            child_dataList:'',
-            from:'',
-            to:''
+    props:{
+        dataName:{
+            type:String,
+            default:'Countries',
+            require:true
         }
     },
-    //获取countries信息
-    beforeMount: function() {
-        var _self = this;
-        var len=0;
-        axios({
-            method:'get',
-            params: {
-                page: _self.nowpageId
-            },
-            url:'/vue/api/getCountries'
-        })
-            .then(function (response) {
-                _self.totalPage = response.data.totalPage;
-                _self.dataList = response.data.list;
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+    data:function(){
+        return {
+            pagec:'Countries',
+            nowpageId:0,
+            totalPage:'',
+            dataList:'',
+            updatelist:function(){}
+        }
     },
     methods:{
         up:function(parm){
@@ -116,35 +92,16 @@ Vue.component('table-body',{
                 alert('已经是最后一页了');
             }
         }
-        ,
-        updatelist:function(ele){
-            var _self = this;
-            var urldes = '/vue/api/get'+this.dataName;
-            axios({
-                method:'get',
-                params:{
-                    page:ele
-                },
-                url:urldes
-            })
-                .then(function (response) {
-                   _self.totalPage = response.data.totalPage;
-                   _self.dataList = response.data.list;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-        }
     },
-    watch:{
-        dataName:function(val,oleVal){
-            var urldes = '/vue/api/get'+val;
-            var _self = this;
-            _self.nowpageId = 0;
+    beforeMount: function() {
+        var _self = this;
+        //获取navlist信息渲染界面
+        _self.updatelist = function(ele){
+            var urldes = '/vue/api/get'+_self.dataName;
             axios({
                 method:'get',
                 params: {
-                    page: _self.nowpageId
+                    page:ele
                 },
                 url:urldes
             })
@@ -155,6 +112,16 @@ Vue.component('table-body',{
                 .catch(function (error) {
                     console.log(error);
                 });
+        };
+        _self.updatelist(_self.nowpageId);
+    },
+
+    watch:{
+        dataName:function(val,oleVal){
+            var urldes = '/vue/api/get'+val;
+            var _self = this;
+            _self.nowpageId = 0;
+            _self.updatelist(_self.nowpageId);
         }
     },
     template:'\
@@ -168,7 +135,7 @@ Vue.component('table-body',{
                         <th class="table_cell"> {{dataName}}<span> &nbsp;name</span></th>\
                         <th class="table_cell"> {{dataName}}<span> &nbsp;value</span></th>\
                     </tr>\
-                    <tr  v-for="item of dataList">\
+                    <tr  v-for="item in dataList">\
                         <td class="table_cell">{{item.name}}</td>\
                         <td class="table_cell">{{item.value}}</td>\
                     </tr>\
@@ -190,14 +157,13 @@ Vue.component('table-body',{
 var vm = new Vue({
     el: '#webapp',
     data:{
-        aaa:'',
-        prefix: ''
+        //给子组件传入默认值
+        dataname:'Countries'
     },
     methods:{
         changename:function(paramater){
-            // console.log(paramater);
-            this.aaa=paramater;
             //    父组件中接收事件
+            this.dataname=paramater;
         }
     }
 });
