@@ -49,29 +49,29 @@ Vue.component('list',{
    
     computed: {
         indexs: function(){
-          var left = 1;
-          var right = this.totalPage;
-          var ar = [];
-          if(this.totalPage>= 5){
-            if(this.cur > 3 && this.cur < this.totalPage-2){
-                    left = this.cur - 2
-                    right = this.cur + 2
-            }else{
-                if(this.cur<=3){
-                    left = 1
-                    right = 5
-                }else{
-                    right = this.totalPage
-                    left = this.totalPage -4
+            var left = 1;
+            var right = this.totalPage;
+            var ar = [];
+                if(this.totalPage>= 5){
+                    if(this.cur > 3 && this.cur < this.totalPage-2){
+	                    left = this.cur - 2;
+	                    right = this.cur + 2;
+                    }else{
+                        if(this.cur<=3){
+                            left = 1;
+                            right = 5;
+                        }else{
+		                    right = this.totalPage;
+		                    left = this.totalPage -4;
+                        }
+                    }
                 }
-          }
-    }
-        while (left <= right){
-            ar.push(left)
-            left ++
-        }
-        return ar
-       }
+	            while (left <= right){
+		            ar.push(left);
+		            left ++;
+	            }
+	            return ar;
+	            }
          
     },
     methods: {
