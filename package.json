@@ -12,6 +12,7 @@
   "author": "wangjin",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.16.2",
     "express": "^4.14.0"
   },
   "devDependencies": {
