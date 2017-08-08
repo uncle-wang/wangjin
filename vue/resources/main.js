@@ -37,22 +37,23 @@ Vue.component('slid-bar',{
         return {
             nowpage:'',
             navitems:[
-                {num:1,  text: 'Countries'},
-                {num:2,  text: 'Operators'}
+                {num:1,  name: 'Countries',desurl:'country'},
+                {num:2,  name: 'Operators',desurl:'operator'}
             ]
         }
     },
     methods:{
         pagechange:function(prmt){
-            this.nowpage = prmt;
+            window.location.href = '/vue/'+prmt;
+            // this.nowpage = prmt;
             // 向父组件中派发事件
-            this.$emit('name-change',this.nowpage);
+            // this.$emit('name-change',this.nowpage);
         }
     },
     template:'\
         <div class="nav_bar">\
             <div  v-for="item in navitems">\
-                <button class="nav_list" @click="pagechange(item.text)">{{item.text}}</button>\
+                <button class="nav_list" @click="pagechange(item.desurl)">{{item.name}}</button>\
             </div>\
         </div>\
         '
@@ -61,14 +62,11 @@ Vue.component('slid-bar',{
 Vue.component('table-body',{
     props:{
         dataName:{
-            type:String,
-            default:'Countries',
-            require:true
+            type:String
         }
     },
     data:function(){
         return {
-            pagec:'Countries',
             nowpageId:0,
             totalPage:'',
             dataList:'',
@@ -97,6 +95,7 @@ Vue.component('table-body',{
         var _self = this;
         //获取navlist信息渲染界面
         _self.updatelist = function(ele){
+            console.log(_self.dataName);
             var urldes = '/vue/api/get'+_self.dataName;
             axios({
                 method:'get',
@@ -135,35 +134,23 @@ Vue.component('table-body',{
                         <th class="table_cell"> {{dataName}}<span> &nbsp;name</span></th>\
                         <th class="table_cell"> {{dataName}}<span> &nbsp;value</span></th>\
                     </tr>\
-                    <tr  v-for="item in dataList">\
+                    <tr v-for="item in dataList">\
                         <td class="table_cell">{{item.name}}</td>\
                         <td class="table_cell">{{item.value}}</td>\
                     </tr>\
                 </table>\
-            <div class="data_page">\
-                <input type="button" value="上一页" @click="up(nowpageId)">\
-                <span class="nowpageNum">{{nowpageId+1}}</span>\
-                <input type="button" value="下一页" @click="down(nowpageId)">\
-                <span class="pageTotal"> <span style="font-weight:bold">总页数:</span>{{totalPage}}</span>\
+                <div class="data_page">\
+                    <input type="button" value="上一页" @click="up(nowpageId)">\
+                    <span class="nowpageNum">{{nowpageId+1}}</span>\
+                    <input type="button" value="下一页" @click="down(nowpageId)">\
+                    <span class="pageTotal"> <span style="font-weight:bold">总页数:</span>{{totalPage}}</span>\
+                </div>\
             </div>\
-            \
-            </div>\
-            \
         </div>\
         '
 });
 
 //创建一个中间事件中心
 var vm = new Vue({
-    el: '#webapp',
-    data:{
-        //给子组件传入默认值
-        dataname:'Countries'
-    },
-    methods:{
-        changename:function(paramater){
-            //    父组件中接收事件
-            this.dataname=paramater;
-        }
-    }
+    el: '#webapp'
 });
