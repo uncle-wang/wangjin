@@ -45,9 +45,6 @@ Vue.component('slid-bar',{
     methods:{
         pagechange:function(prmt){
             window.location.href = '/vue/'+prmt;
-            // this.nowpage = prmt;
-            // 向父组件中派发事件
-            // this.$emit('name-change',this.nowpage);
         }
     },
     template:'\
